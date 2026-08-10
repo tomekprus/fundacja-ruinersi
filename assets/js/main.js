@@ -28,6 +28,49 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* --- Drobne korekty treści i zdjęcia Zarządu ---------------------------- */
+
+  function initContentAdjustments() {
+    var path = window.location.pathname.split("/").pop() || "index.html";
+
+    if (path === "index.html" || path === "") {
+      document.querySelectorAll("main > section").forEach(function (section) {
+        var eyebrow = section.querySelector(".eyebrow");
+        if (eyebrow && eyebrow.textContent.trim() === "Aktualności") section.remove();
+      });
+    }
+
+    if (path === "o-fundacji.html") {
+      var photos = {
+        "Darek Borkowski": "assets/img/darek-borkowski.webp",
+        "Tomasz Prus": "assets/img/tomasz-prus.webp"
+      };
+
+      document.querySelectorAll("#ludzie .person").forEach(function (card) {
+        var heading = card.querySelector("h3");
+        if (!heading) return;
+        var src = photos[heading.textContent.trim()];
+        if (!src) return;
+
+        var oldFigure = card.querySelector("figure");
+        if (!oldFigure) return;
+
+        var figure = document.createElement("figure");
+        figure.style.cssText = "aspect-ratio:4/5;overflow:hidden;margin:0;background:var(--plaster-sunk);";
+
+        var img = document.createElement("img");
+        img.src = src;
+        img.alt = heading.textContent.trim();
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
+
+        figure.appendChild(img);
+        oldFigure.replaceWith(figure);
+      });
+    }
+  }
+
   function initGlobalNavLinks() {
     var list = document.querySelector("#nav > ul");
     if (!list) return;
@@ -105,5 +148,5 @@
 
   function initYear() { document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); }); }
   function ready(fn) { if (document.readyState !== "loading") fn(); else document.addEventListener("DOMContentLoaded", fn); }
-  ready(function () { initGlobalNavLinks(); initNav(); initReveal(); initDates(); initFilters(); initForms(); initYear(); });
+  ready(function () { initContentAdjustments(); initGlobalNavLinks(); initNav(); initReveal(); initDates(); initFilters(); initForms(); initYear(); });
 })();
