@@ -150,28 +150,41 @@ Przepięcie na Formspree (darmowy plan wystarczy na start):
 
 ## 5. Publikacja na GitHub Pages
 
+Repozytorium git jest już zainicjowane, gałąź `main`, pierwszy commit zrobiony.
+Zostało tylko podpiąć zdalne repozytorium i wypchnąć.
+
+**1. Utwórz puste repozytorium na GitHubie** (github.com/new) — bez README,
+bez .gitignore, bez licencji. Inaczej push się odbije.
+
+**2. Podepnij je i wypchnij:**
+
 ```bash
 cd C:\Users\prust\Documents\ruinersi-fundacja
-git init
-git add .
-git commit -m "Prototyp strony Fundacji Ruinersi"
-git branch -M main
-git remote add origin https://github.com/UŻYTKOWNIK/REPO.git
+git remote add origin https://github.com/UŻYTKOWNIK/NAZWA-REPO.git
 git push -u origin main
 ```
 
-Następnie w repozytorium: **Settings → Pages → Source: Deploy from a branch →
-`main` / `/ (root)`**.
+**3. Włącz Pages:** w repozytorium **Settings → Pages → Source: Deploy from
+a branch → `main` / `/ (root)` → Save**. Po 1–2 minutach strona jest pod
+`https://UŻYTKOWNIK.github.io/NAZWA-REPO/`.
 
-Plik `.nojekyll` jest już w repo — bez niego GitHub przepuszcza pliki przez Jekyll
-i katalogi zaczynające się od podkreślenia znikają.
+Kolejne zmiany:
 
-Wszystkie ścieżki są względne, więc strona zadziała zarówno pod
-`użytkownik.github.io/repo/`, jak i na własnej domenie. Wyjątek: `404.html`
-używa ścieżek bezwzględnych (`/assets/...`), bo GitHub serwuje ją spod dowolnego
-adresu — przy publikacji w podkatalogu popraw je na `/repo/assets/...`.
+```bash
+git add -A
+git commit -m "opis zmiany"
+git push
+```
 
-Własna domena: dodaj plik `CNAME` z samą nazwą domeny i skonfiguruj DNS.
+Uwagi:
+
+- Plik `.nojekyll` jest w repo — bez niego GitHub przepuszcza pliki przez Jekyll.
+- Wszystkie ścieżki są względne, więc strona działa zarówno pod
+  `użytkownik.github.io/repo/`, jak i na własnej domenie. Nie trzeba nic zmieniać.
+- Chcesz adres bez podkatalogu? Nazwij repozytorium `UŻYTKOWNIK.github.io`.
+- Własna domena: dodaj plik `CNAME` z samą nazwą domeny i skonfiguruj DNS.
+- Przed publikacją podmień `ruinersi.example` w `sitemap.xml`, `robots.txt`
+  i w `<link rel="canonical">` w `index.html` na docelowy adres.
 
 ---
 
