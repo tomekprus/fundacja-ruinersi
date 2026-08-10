@@ -1,15 +1,9 @@
 /* =========================================================================
    Fundacja Ruinersi — skrypty prototypu. Bez zależności zewnętrznych.
-
-   Warstwa tekstów interfejsu jest wydzielona do obiektu I18N, żeby dodanie
-   wersji EN / DE / CS nie wymagało szukania napisów po komponentach.
-   Aktywny język bierzemy z atrybutu <html lang>.
    ========================================================================= */
 
 (function () {
   "use strict";
-
-  /* --- Słowniki interfejsu ------------------------------------------------ */
 
   var I18N = {
     pl: {
@@ -21,7 +15,6 @@
       "nav.menu": "Menu",
       "date.locale": "pl-PL"
     }
-    // en / de / cs — do uzupełnienia razem z tłumaczeniami treści
   };
 
   var LANG = (document.documentElement.lang || "pl").slice(0, 2);
@@ -39,42 +32,36 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* --- Globalne pozycje w nawigacji --------------------------------------- */
+  /* --- Stałe pozycje globalnej nawigacji ---------------------------------- */
 
   function initGlobalNavLinks() {
-    document.querySelectorAll("nav ul").forEach(function (list) {
-      var path = window.location.pathname.split("/").pop();
+    var list = document.querySelector("#nav > ul");
+    if (!list) return;
 
-      if (!list.querySelector('a[href="materialy-edukacyjne.html"]')) {
-        var mediaLink = list.querySelector('a[href="media.html"]');
-        var contactLink = list.querySelector('a[href="kontakt.html"]');
-        var item = document.createElement("li");
-        var link = document.createElement("a");
-        link.href = "materialy-edukacyjne.html";
-        link.textContent = "Materiały edukacyjne";
-        if (path === "materialy-edukacyjne.html") link.setAttribute("aria-current", "page");
-        item.appendChild(link);
+    var path = window.location.pathname.split("/").pop() || "index.html";
 
-        if (mediaLink && mediaLink.closest("li")) mediaLink.closest("li").before(item);
-        else if (contactLink && contactLink.closest("li")) contactLink.closest("li").before(item);
+    function addLink(href, label, beforeHref) {
+      var existing = list.querySelector('a[href="' + href + '"]');
+      if (existing) {
+        if (path === href) existing.setAttribute("aria-current", "page");
+        return;
       }
 
-      if (!list.querySelector('a[href="media.html"]')) {
-        var contact = list.querySelector('a[href="kontakt.html"]');
-        if (contact) {
-          var mediaItem = document.createElement("li");
-          var media = document.createElement("a");
-          media.href = "media.html";
-          media.textContent = "Media";
-          if (path === "media.html") media.setAttribute("aria-current", "page");
-          mediaItem.appendChild(media);
-          contact.closest("li").before(mediaItem);
-        }
-      }
-    });
+      var item = document.createElement("li");
+      var link = document.createElement("a");
+      link.href = href;
+      link.textContent = label;
+      if (path === href) link.setAttribute("aria-current", "page");
+      item.appendChild(link);
+
+      var before = list.querySelector('a[href="' + beforeHref + '"]');
+      if (before && before.closest("li")) before.closest("li").before(item);
+      else list.appendChild(item);
+    }
+
+    addLink("materialy-edukacyjne.html", "Materiały edukacyjne", "media.html");
+    addLink("media.html", "Media", "kontakt.html");
   }
-
-  /* --- Nawigacja mobilna --------------------------------------------------- */
 
   function initNav() {
     var toggle = document.querySelector(".nav-toggle");
@@ -104,17 +91,13 @@
     });
   }
 
-  /* --- Delikatne wejście sekcji -------------------------------------------- */
-
   function initReveal() {
     var items = document.querySelectorAll(".reveal");
     if (!items.length) return;
-
     if (reduceMotion || !("IntersectionObserver" in window)) {
       items.forEach(function (el) { el.classList.add("in"); });
       return;
     }
-
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
@@ -122,22 +105,17 @@
         io.unobserve(entry.target);
       });
     }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
-
     items.forEach(function (el) { io.observe(el); });
   }
-
-  /* --- Daty ----------------------------------------------------------------- */
 
   function initDates() {
     var nodes = document.querySelectorAll("time[datetime][data-format]");
     if (!nodes.length) return;
-
     var opts = {
       long:  { day: "numeric", month: "long", year: "numeric" },
       short: { day: "numeric", month: "short", year: "numeric" },
       month: { month: "long", year: "numeric" }
     };
-
     nodes.forEach(function (node) {
       var value = node.getAttribute("datetime");
       var date = new Date(value);
@@ -145,30 +123,23 @@
       var style = node.dataset.format || "long";
       try {
         node.textContent = new Intl.DateTimeFormat(t("date.locale"), opts[style] || opts.long).format(date);
-      } catch (e) { }
+      } catch (e) {}
     });
   }
-
-  /* --- Filtr projektów ------------------------------------------------------- */
 
   function initFilters() {
     var bar = document.querySelector(".filters");
     var list = document.getElementById("projects");
     if (!bar || !list) return;
-
     var cards = Array.prototype.slice.call(list.querySelectorAll(".project"));
     var buttons = Array.prototype.slice.call(bar.querySelectorAll(".filter"));
     var empty = document.getElementById("projects-empty");
-
     buttons.forEach(function (btn) {
       var value = btn.dataset.filter;
-      var n = value === "all"
-        ? cards.length
-        : cards.filter(function (c) { return c.dataset.category === value; }).length;
+      var n = value === "all" ? cards.length : cards.filter(function (c) { return c.dataset.category === value; }).length;
       var slot = btn.querySelector(".filter-count");
       if (slot) slot.textContent = n;
     });
-
     function apply(value) {
       var shown = 0;
       cards.forEach(function (card) {
@@ -176,90 +147,59 @@
         card.hidden = !match;
         if (match) shown++;
       });
-      buttons.forEach(function (btn) {
-        btn.setAttribute("aria-pressed", String(btn.dataset.filter === value));
-      });
+      buttons.forEach(function (btn) { btn.setAttribute("aria-pressed", String(btn.dataset.filter === value)); });
       if (empty) empty.hidden = shown > 0;
     }
-
     bar.addEventListener("click", function (e) {
       var btn = e.target.closest(".filter");
       if (btn) apply(btn.dataset.filter);
     });
-
     apply("all");
   }
-
-  /* --- Formularz kontaktowy --------------------------------------------------- */
 
   function initForms() {
     document.querySelectorAll("form[data-mailto]").forEach(function (form) {
       var status = form.querySelector(".form-status");
-
       function setError(input, message) {
         var slot = form.querySelector('[data-error-for="' + input.name + '"]');
         if (slot) slot.textContent = message || "";
         input.setAttribute("aria-invalid", message ? "true" : "false");
       }
-
       function validate() {
         var ok = true;
         form.querySelectorAll("[name]").forEach(function (input) {
           var value = (input.value || "").trim();
-          if (input.required && !value) {
-            setError(input, t("form.error.required"));
-            ok = false;
-          } else if (input.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-            setError(input, t("form.error.email"));
-            ok = false;
-          } else {
-            setError(input, "");
-          }
+          if (input.required && !value) { setError(input, t("form.error.required")); ok = false; }
+          else if (input.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { setError(input, t("form.error.email")); ok = false; }
+          else setError(input, "");
         });
         return ok;
       }
-
-      form.addEventListener("input", function (e) {
-        if (e.target.getAttribute("aria-invalid") === "true") validate();
-      });
-
+      form.addEventListener("input", function (e) { if (e.target.getAttribute("aria-invalid") === "true") validate(); });
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-
         if (!validate()) {
           if (status) status.textContent = t("form.error.summary");
           var first = form.querySelector('[aria-invalid="true"]');
           if (first) first.focus();
           return;
         }
-
         var address = form.dataset.mailto;
         var lines = [];
         form.querySelectorAll("[name]").forEach(function (input) {
           var label = form.querySelector('label[for="' + input.id + '"]');
           lines.push((label ? label.textContent.trim() : input.name) + ":\n" + input.value.trim());
         });
-
         var subjectField = form.querySelector('[name="temat"]');
         var subject = (subjectField && subjectField.value.trim()) || form.dataset.subject || "";
-
-        window.location.href = "mailto:" + address +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(lines.join("\n\n"));
-
-        if (status) {
-          status.textContent = t("form.sending") + " " + t("form.fallback", { email: address });
-        }
+        window.location.href = "mailto:" + address + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\n\n"));
+        if (status) status.textContent = t("form.sending") + " " + t("form.fallback", { email: address });
       });
     });
   }
 
-  /* --- Rok w stopce ------------------------------------------------------------ */
-
   function initYear() {
-    document.querySelectorAll("[data-year]").forEach(function (el) {
-      el.textContent = new Date().getFullYear();
-    });
+    document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
   }
 
   function ready(fn) {
