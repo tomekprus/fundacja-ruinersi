@@ -39,6 +39,28 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* --- Globalna pozycja Media w nawigacji --------------------------------- */
+
+  function initMediaNav() {
+    document.querySelectorAll("nav ul").forEach(function (list) {
+      if (list.querySelector('a[href="media.html"]')) return;
+
+      var contactLink = list.querySelector('a[href="kontakt.html"]');
+      if (!contactLink) return;
+
+      var item = document.createElement("li");
+      var link = document.createElement("a");
+      link.href = "media.html";
+      link.textContent = "Media";
+
+      var path = window.location.pathname.split("/").pop();
+      if (path === "media.html") link.setAttribute("aria-current", "page");
+
+      item.appendChild(link);
+      contactLink.closest("li").before(item);
+    });
+  }
+
   /* --- Nawigacja mobilna --------------------------------------------------- */
 
   function initNav() {
@@ -237,6 +259,7 @@
   }
 
   ready(function () {
+    initMediaNav();
     initNav();
     initReveal();
     initDates();
