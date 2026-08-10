@@ -22,7 +22,41 @@
   function initReveal(){var items=document.querySelectorAll(".reveal");if(!items.length)return;if(reduceMotion||!("IntersectionObserver" in window)){items.forEach(function(el){el.classList.add("in");});return;}var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target);});},{rootMargin:"0px 0px -6% 0px",threshold:.06});items.forEach(function(el){io.observe(el);});}
   function initDates(){var nodes=document.querySelectorAll("time[datetime][data-format]");if(!nodes.length)return;var opts={long:{day:"numeric",month:"long",year:"numeric"},short:{day:"numeric",month:"short",year:"numeric"},month:{month:"long",year:"numeric"}};nodes.forEach(function(node){var date=new Date(node.getAttribute("datetime"));if(isNaN(date))return;var style=node.dataset.format||"long";try{node.textContent=new Intl.DateTimeFormat(t("date.locale"),opts[style]||opts.long).format(date);}catch(e){}});}
   function initFilters(){var bar=document.querySelector(".filters"),list=document.getElementById("projects");if(!bar||!list)return;var cards=Array.prototype.slice.call(list.querySelectorAll(".project")),buttons=Array.prototype.slice.call(bar.querySelectorAll(".filter")),empty=document.getElementById("projects-empty");buttons.forEach(function(btn){var value=btn.dataset.filter,n=value==="all"?cards.length:cards.filter(function(c){return c.dataset.category===value;}).length,slot=btn.querySelector(".filter-count");if(slot)slot.textContent=n;});function apply(value){var shown=0;cards.forEach(function(card){var match=value==="all"||card.dataset.category===value;card.hidden=!match;if(match)shown++;});buttons.forEach(function(btn){btn.setAttribute("aria-pressed",String(btn.dataset.filter===value));});if(empty)empty.hidden=shown>0;}bar.addEventListener("click",function(e){var btn=e.target.closest(".filter");if(btn)apply(btn.dataset.filter);});apply("all");}
-  function initForms(){document.querySelectorAll("form[data-mailto]").forEach(function(form){var status=form.querySelector(".form-status");function setError(input,message){var slot=form.querySelector('[data-error-for="'+input.name+'"]');if(slot)slot.textContent=message||"";input.setAttribute("aria-invalid",message?"true":"false");}function validate(){var ok=true;form.querySelectorAll("[name]").forEach(function(input){var value=(input.value||"").trim();if(input.required&&!value){setError(input,t("form.error.required"));ok=false;}else if(input.type==="email"&&value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,t("form.error.email"));ok=false;}else setError(input,"");});return ok;}form.addEventListener("input",function(e){if(e.target.getAttribute("aria-invalid")==="true")validate();});form.addEventListener("submit",function(e){e.preventDefault();if(!validate()){if(status)status.textContent=t("form.error.summary");var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}var address=form.dataset.mailto,lines=[];form.querySelectorAll("[name]").forEach(function(input){var label=form.querySelector('label[for="'+input.id+'"]');lines.push((label?label.textContent.trim():input.name)+":\n"+input.value.trim());});var subjectField=form.querySelector('[name="temat"]'),subject=(subjectField&&subjectField.value.trim())||form.dataset.subject||"";window.location.href="mailto:"+address+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(lines.join("\n\n"));if(status)status.textContent=t("form.sending")+" "+t("form.fallback",{email:address});});});}
+  function initForms(){
+    document.querySelectorAll("form[data-mailto]").forEach(function(form){
+      var status=form.querySelector(".form-status");
+      function setError(input,message){var slot=form.querySelector('[data-error-for="'+input.name+'"]');if(slot)slot.textContent=message||"";input.setAttribute("aria-invalid",message?"true":"false");}
+      function validate(){var ok=true;form.querySelectorAll("[name]").forEach(function(input){var value=(input.value||"").trim();if(input.required&&!value){setError(input,t("form.error.required"));ok=false;}else if(input.type==="email"&&value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,t("form.error.email"));ok=false;}else setError(input,"");});return ok;}
+      form.addEventListener("input",function(e){if(e.target.getAttribute("aria-invalid")==="true")validate();});
+      form.addEventListener("submit",function(e){
+        e.preventDefault();
+        if(!validate()){if(status)status.textContent=t("form.error.summary");var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}
+        var address=form.dataset.mailto;
+        var subjectField=form.querySelector('[name="temat"]');
+        var subject=(subjectField&&subjectField.value.trim())||form.dataset.subject||"";
+        var nameField=form.querySelector('[name="imie"]');
+        var emailField=form.querySelector('[name="email"]');
+        var messageField=form.querySelector('[name="wiadomosc"]');
+        var body;
+        if(messageField){
+          body=[
+            "Imię: "+(nameField?nameField.value.trim():""),
+            "E-mail: "+(emailField?emailField.value.trim():""),
+            "",
+            "Wiadomość:",
+            messageField.value.trim()
+          ].join("\r\n");
+        }else{
+          var lines=[];
+          form.querySelectorAll("[name]").forEach(function(input){var label=form.querySelector('label[for="'+input.id+'"]');lines.push((label?label.textContent.trim():input.name)+": "+input.value.trim());});
+          body=lines.join("\r\n\r\n");
+        }
+        var mailto="mailto:"+address+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+        window.location.assign(mailto);
+        if(status)status.textContent=t("form.sending")+" "+t("form.fallback",{email:address});
+      });
+    });
+  }
   function initYear(){document.querySelectorAll("[data-year]").forEach(function(el){el.textContent=new Date().getFullYear();});}
   function ready(fn){if(document.readyState!=="loading")fn();else document.addEventListener("DOMContentLoaded",fn);}
   ready(function(){initContentAdjustments();initGlobalNavLinks();initNav();initReveal();initDates();initFilters();initForms();initYear();});
