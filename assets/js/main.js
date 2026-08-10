@@ -39,25 +39,38 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* --- Globalna pozycja Media w nawigacji --------------------------------- */
+  /* --- Globalne pozycje w nawigacji --------------------------------------- */
 
-  function initMediaNav() {
+  function initGlobalNavLinks() {
     document.querySelectorAll("nav ul").forEach(function (list) {
-      if (list.querySelector('a[href="media.html"]')) return;
-
-      var contactLink = list.querySelector('a[href="kontakt.html"]');
-      if (!contactLink) return;
-
-      var item = document.createElement("li");
-      var link = document.createElement("a");
-      link.href = "media.html";
-      link.textContent = "Media";
-
       var path = window.location.pathname.split("/").pop();
-      if (path === "media.html") link.setAttribute("aria-current", "page");
 
-      item.appendChild(link);
-      contactLink.closest("li").before(item);
+      if (!list.querySelector('a[href="materialy-edukacyjne.html"]')) {
+        var mediaLink = list.querySelector('a[href="media.html"]');
+        var contactLink = list.querySelector('a[href="kontakt.html"]');
+        var item = document.createElement("li");
+        var link = document.createElement("a");
+        link.href = "materialy-edukacyjne.html";
+        link.textContent = "Materiały edukacyjne";
+        if (path === "materialy-edukacyjne.html") link.setAttribute("aria-current", "page");
+        item.appendChild(link);
+
+        if (mediaLink && mediaLink.closest("li")) mediaLink.closest("li").before(item);
+        else if (contactLink && contactLink.closest("li")) contactLink.closest("li").before(item);
+      }
+
+      if (!list.querySelector('a[href="media.html"]')) {
+        var contact = list.querySelector('a[href="kontakt.html"]');
+        if (contact) {
+          var mediaItem = document.createElement("li");
+          var media = document.createElement("a");
+          media.href = "media.html";
+          media.textContent = "Media";
+          if (path === "media.html") media.setAttribute("aria-current", "page");
+          mediaItem.appendChild(media);
+          contact.closest("li").before(mediaItem);
+        }
+      }
     });
   }
 
@@ -114,8 +127,6 @@
   }
 
   /* --- Daty ----------------------------------------------------------------- */
-  /* Nigdy nie składamy dat z nazw miesięcy wpisanych w kodzie.
-     W HTML jest tylko <time datetime="2026-06-27">, formatuje Intl. */
 
   function initDates() {
     var nodes = document.querySelectorAll("time[datetime][data-format]");
@@ -134,7 +145,7 @@
       var style = node.dataset.format || "long";
       try {
         node.textContent = new Intl.DateTimeFormat(t("date.locale"), opts[style] || opts.long).format(date);
-      } catch (e) { /* zostaje treść zapasowa z HTML */ }
+      } catch (e) { }
     });
   }
 
@@ -180,8 +191,6 @@
   }
 
   /* --- Formularz kontaktowy --------------------------------------------------- */
-  /* Prototyp statyczny nie ma backendu — składamy wiadomość i oddajemy ją
-     programowi pocztowemu. Podmiana na Formspree/Resend opisana w README. */
 
   function initForms() {
     document.querySelectorAll("form[data-mailto]").forEach(function (form) {
@@ -259,7 +268,7 @@
   }
 
   ready(function () {
-    initMediaNav();
+    initGlobalNavLinks();
     initNav();
     initReveal();
     initDates();
