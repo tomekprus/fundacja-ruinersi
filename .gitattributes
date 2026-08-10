@@ -1,0 +1,13 @@
+# Jednolite końce linii (LF) niezależnie od systemu — bez tego git na Windows
+# przy każdym checkoucie zamienia LF na CRLF i pokazuje fałszywe zmiany.
+* text=auto eol=lf
+
+# Pliki binarne — bez konwersji
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
