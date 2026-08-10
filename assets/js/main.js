@@ -33,6 +33,12 @@
   function initContentAdjustments() {
     var path = window.location.pathname.split("/").pop() || "index.html";
 
+    /* Ujednolicona nazwa Fundacji przy logo na wszystkich podstronach. */
+    var brandText = document.querySelector(".brand-text");
+    if (brandText) {
+      brandText.innerHTML = "<b>Fundacja Ruinersi</b><small>na Dolnym Śląsku</small>";
+    }
+
     if (path === "index.html" || path === "") {
       document.querySelectorAll("main > section").forEach(function (section) {
         var eyebrow = section.querySelector(".eyebrow");
