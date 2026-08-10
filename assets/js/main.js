@@ -74,33 +74,48 @@
   function initGlobalNavLinks() {
     var list = document.querySelector("#nav > ul");
     if (!list) return;
+
     var path = window.location.pathname.split("/").pop() || "index.html";
+    var navItems = [
+      { href: "index.html", label: "Strona główna" },
+      { href: "o-fundacji.html", label: "O Fundacji" },
+      { href: "aktualnosci.html", label: "Aktualności" },
+      { href: "klaster.html", label: "Klaster" },
+      { href: "projekty.html", label: "Projekty" },
+      { href: "materialy-edukacyjne.html", label: "Materiały edukacyjne" },
+      { href: "media.html", label: "Media" },
+      { href: "kontakt.html", label: "Kontakt" }
+    ];
 
-    function ensureLink(href, label) {
-      var link = list.querySelector('a[href="' + href + '"]');
-      if (!link) {
-        var item = document.createElement("li");
+    var itemsByHref = {};
+    Array.prototype.slice.call(list.querySelectorAll("li")).forEach(function (item) {
+      var link = item.querySelector("a[href]");
+      if (link) itemsByHref[link.getAttribute("href")] = item;
+    });
+
+    navItems.forEach(function (entry) {
+      var item = itemsByHref[entry.href];
+      var link;
+
+      if (!item) {
+        item = document.createElement("li");
         link = document.createElement("a");
-        link.href = href;
-        link.textContent = label;
+        link.href = entry.href;
+        link.textContent = entry.label;
         item.appendChild(link);
+      } else {
+        link = item.querySelector("a[href]");
+        link.textContent = entry.label;
       }
-      if (path === href) link.setAttribute("aria-current", "page");
-      return link.closest("li");
-    }
 
-    var mediaItem = ensureLink("media.html", "Media");
-    var materialsItem = ensureLink("materialy-edukacyjne.html", "Materiały edukacyjne");
-    var contact = list.querySelector('a[href="kontakt.html"]');
-    var contactItem = contact && contact.closest("li");
+      if (path === entry.href || (path === "" && entry.href === "index.html")) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
 
-    if (contactItem) {
-      contactItem.before(mediaItem);
-      contactItem.before(materialsItem);
-    } else {
-      list.appendChild(mediaItem);
-      list.appendChild(materialsItem);
-    }
+      list.appendChild(item);
+    });
   }
 
   function initNav() {
