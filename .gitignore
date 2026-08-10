@@ -1,0 +1,18 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+
+# Edytory
+.vscode/
+.idea/
+*.swp
+*~
+
+# Pliki tymczasowe
+*.log
+*.tmp
