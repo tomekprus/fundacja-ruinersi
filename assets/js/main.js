@@ -9,6 +9,15 @@
 (function () {
   "use strict";
 
+  /* Accessibility overrides are deliberately isolated in a small stylesheet
+     so contrast and focus rules are easy to review independently. */
+  if (!document.querySelector('link[href="assets/css/accessibility.css"]')) {
+    var a11yStyles = document.createElement("link");
+    a11yStyles.rel = "stylesheet";
+    a11yStyles.href = "assets/css/accessibility.css";
+    document.head.appendChild(a11yStyles);
+  }
+
   var I18N = {
     pl: {
       "form.error.required": "To pole jest wymagane.",
@@ -32,20 +41,39 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function initAccessibility() {
+    var main = document.getElementById("main");
+    if (main && !main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+  }
+
   function initNav() {
     var toggle = document.querySelector(".nav-toggle");
     var nav = document.getElementById("nav");
     if (!toggle || !nav) return;
 
+    var mobileQuery = window.matchMedia("(max-width: 1240px)");
+
+    function syncInert() {
+      var open = toggle.getAttribute("aria-expanded") === "true";
+      nav.inert = mobileQuery.matches && !open;
+    }
+
     function close() {
       toggle.setAttribute("aria-expanded", "false");
       nav.setAttribute("data-open", "false");
+      syncInert();
+    }
+
+    function open() {
+      toggle.setAttribute("aria-expanded", "true");
+      nav.setAttribute("data-open", "true");
+      syncInert();
     }
 
     toggle.addEventListener("click", function () {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      nav.setAttribute("data-open", String(!open));
+      var isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (isOpen) close();
+      else open();
     });
 
     document.addEventListener("keydown", function (e) {
@@ -55,9 +83,19 @@
       }
     });
 
-    window.addEventListener("resize", function () {
-      if (window.innerWidth > 1240) close();
-    });
+    if (typeof mobileQuery.addEventListener === "function") {
+      mobileQuery.addEventListener("change", function () {
+        if (!mobileQuery.matches) close();
+        else syncInert();
+      });
+    } else {
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 1240) close();
+        else syncInert();
+      });
+    }
+
+    syncInert();
   }
 
   function initReveal() {
@@ -231,6 +269,7 @@
   }
 
   ready(function () {
+    initAccessibility();
     initNav();
     initReveal();
     initDates();
