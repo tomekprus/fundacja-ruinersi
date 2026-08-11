@@ -32,20 +32,8 @@
   function initContentEnhancements() {
     var path = window.location.pathname.split("/").pop() || "index.html";
 
-    /* Subtelne wyróżnienie głównego CTA w nawigacji bez zaburzania rytmu menu. */
-    var supportLink = document.querySelector('.nav a[href="wesprzyj.html"]');
-    if (supportLink) supportLink.classList.add("nav-support");
-    if (!document.getElementById("nav-support-style")) {
-      var style = document.createElement("style");
-      style.id = "nav-support-style";
-      style.textContent =
-        '.nav a.nav-support{font-weight:700;color:var(--brick-deep);padding:.38rem .68rem;margin-inline:-.18rem;border-radius:999px;background:color-mix(in srgb,var(--brick) 7%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brick) 16%,transparent);transition:background .2s var(--ease),color .2s var(--ease),box-shadow .2s var(--ease),transform .2s var(--ease)}' +
-        '.nav a.nav-support::after{display:none}' +
-        '.nav a.nav-support:hover{color:var(--brick-deep);background:color-mix(in srgb,var(--brick) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--brick) 28%,transparent);transform:translateY(-1px)}' +
-        '.nav a.nav-support[aria-current="page"]{color:var(--plaster);background:var(--brick-deep);box-shadow:none}' +
-        '@media(max-width:1080px){.nav a.nav-support{display:block;margin:.45rem 0 .25rem;padding:.85rem 1rem;border-radius:0;background:color-mix(in srgb,var(--brick) 7%,transparent);box-shadow:inset 3px 0 0 var(--brick);border-bottom:1px solid var(--rule)}.nav a.nav-support:hover{transform:none;background:color-mix(in srgb,var(--brick) 11%,transparent)}.nav a.nav-support[aria-current="page"]{background:var(--brick-deep);color:var(--plaster);box-shadow:none}}';
-      document.head.appendChild(style);
-    }
+    /* Przycisk wsparcia jest zwykłym elementem HTML w belce i ma style
+       w arkuszu (.nav-cta). Skrypt nie musi go już dekorować. */
 
     if (path === "kontakt.html") {
       var contactHeads = Array.prototype.slice.call(document.querySelectorAll(".section-head .h2"));

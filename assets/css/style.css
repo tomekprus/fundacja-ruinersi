@@ -532,13 +532,18 @@ figure {
 .head-right {
   display: flex;
   align-items: center;
-  gap: clamp(1rem,2.5vw,2rem);
+  gap: clamp(.9rem,1.8vw,1.5rem);
 }
+
+/* Kolumna tresci ma najwyzej 1112 px (--wrap 1240 minus marginesy), a musza sie
+   w niej zmiescic marka, osiem pozycji menu i przycisk wsparcia. Odstepy sa
+   wiec ciasniejsze niz w tresci strony i nie rosna bez konca. */
 
 .nav ul {
   display: flex;
   align-items: center;
-  gap: clamp(.9rem,2vw,1.9rem);
+  flex-wrap: nowrap;
+  gap: clamp(.7rem,1.25vw,1.25rem);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -547,6 +552,7 @@ figure {
 .nav a {
   position: relative;
   display: inline-block;
+  white-space: nowrap;
   text-decoration: none;
   font-size: var(--fs-small);
   font-weight: 500;
@@ -581,9 +587,28 @@ figure {
   color: var(--graphite);
 }
 
+/* Przycisk wsparcia w belce.
+   Ten sam język wizualny co przyciski w treści — prostokąt, cegła, biały tekst —
+   tylko niższy, żeby nie przytłaczał nawigacji. Stoi poza listą <ul>, na końcu
+   belki, bo jest działaniem, a nie kolejną pozycją menu. */
+
 .nav-cta {
   flex: none;
   white-space: nowrap;
+  padding: .68rem 1.2rem;
+  font-size: var(--fs-small);
+  box-shadow: 0 1px 0 color-mix(in srgb,var(--brick-deep) 45%,transparent);
+}
+
+.nav-cta:hover {
+  transform: none;
+  box-shadow: 0 2px 0 color-mix(in srgb,var(--brick-deep) 60%,transparent);
+}
+
+.nav-cta[aria-current="page"] {
+  background: var(--brick-deep);
+  border-color: var(--brick-deep);
+  box-shadow: none;
 }
 
 .nav-toggle {
@@ -629,7 +654,10 @@ figure {
   transform: rotate(-45deg);
 }
 
-@media(max-width:1080px) {
+/* Osiem pozycji menu, marka i przycisk wsparcia nie mieszcza sie wygodnie
+   ponizej ~1240 px — nizej belka zwija sie do hamburgera. */
+
+@media(max-width:1240px) {
   .nav-toggle {
     display: inline-flex;
   }
@@ -669,7 +697,11 @@ figure {
 
 @media(max-width:520px) {
   .nav-cta {
-    display: none;
+    padding: .6rem .85rem;
+    font-size: .82rem;
+  }
+  .head-inner {
+    gap: .75rem;
   }
 }
 
@@ -1203,12 +1235,14 @@ figure {
 }
 
 /* pierwszy kafel w rzędzie: bez kreski, wyrównany do lewej krawędzi kolumny tekstu */
+
 .areas > .area:nth-child(4n+1) {
   border-left: 0;
   padding-left: 0;
 }
 
 /* drugi i kolejne rzędy oddzielone poziomą kreską */
+
 .areas > .area:nth-child(n+5) {
   border-top: 1px solid var(--rule);
 }
