@@ -29,11 +29,37 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function removeSectionByEyebrow(label) {
+    Array.prototype.slice.call(document.querySelectorAll("section .eyebrow")).forEach(function (eyebrow) {
+      if (eyebrow.textContent.trim().toLowerCase() === label.toLowerCase()) {
+        var section = eyebrow.closest("section");
+        if (section) section.remove();
+      }
+    });
+  }
+
   function initContentEnhancements() {
     var path = window.location.pathname.split("/").pop() || "index.html";
 
-    /* Przycisk wsparcia jest zwykłym elementem HTML w belce i ma style
-       w arkuszu (.nav-cta). Skrypt nie musi go już dekorować. */
+    if (path === "index.html") {
+      /* Ostatni ciemny CTA powtarza przekaz wcześniejszych sekcji. */
+      removeSectionByEyebrow("Społeczna ochrona dziedzictwa");
+
+      /* Strona główna używa tego samego rytmu pionowego co nagłówki podstron. */
+      if (!document.getElementById("home-hero-spacing")) {
+        var homeStyle = document.createElement("style");
+        homeStyle.id = "home-hero-spacing";
+        homeStyle.textContent =
+          '.hero{padding-block:clamp(3rem,6vw,5.5rem) 0}' +
+          '.hero-text .h1{margin:1rem 0 0;max-width:18ch}' +
+          '.hero-bottom{margin-top:1.25rem;gap:clamp(1.5rem,3vw,2.25rem)}';
+        document.head.appendChild(homeStyle);
+      }
+    }
+
+    if (path === "klaster.html") {
+      removeSectionByEyebrow("Kontakt do operatora");
+    }
 
     if (path === "kontakt.html") {
       var contactHeads = Array.prototype.slice.call(document.querySelectorAll(".section-head .h2"));
@@ -95,27 +121,26 @@
       toggle.setAttribute("aria-expanded", String(!open));
       nav.setAttribute("data-open", String(!open));
     });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") { close(); toggle.focus(); } });
-    window.addEventListener("resize", function () { if (window.innerWidth > 1080) close(); });
+    document.addEventListener("keydown",function(e){if(e.key==="Escape"&&toggle.getAttribute("aria-expanded")==="true"){close();toggle.focus();}});
+    window.addEventListener("resize",function(){if(window.innerWidth>1080)close();});
   }
 
   function initReveal() {
-    var items = document.querySelectorAll(".reveal");
-    if (!items.length) return;
-    if (reduceMotion || !("IntersectionObserver" in window)) { items.forEach(function (el) { el.classList.add("in"); }); return; }
-    var io = new IntersectionObserver(function (entries) { entries.forEach(function (entry) { if (!entry.isIntersecting) return; entry.target.classList.add("in"); io.unobserve(entry.target); }); }, { rootMargin: "0px 0px -6% 0px", threshold: 0.06 });
-    items.forEach(function (el) { io.observe(el); });
+    var items=document.querySelectorAll(".reveal");
+    if(!items.length)return;
+    if(reduceMotion||!("IntersectionObserver" in window)){items.forEach(function(el){el.classList.add("in");});return;}
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target);});},{rootMargin:"0px 0px -6% 0px",threshold:.06});
+    items.forEach(function(el){io.observe(el);});
   }
 
   function initDates() {
-    var nodes = document.querySelectorAll("time[datetime][data-format]");
-    if (!nodes.length) return;
-    var opts = { long:{day:"numeric",month:"long",year:"numeric"}, short:{day:"numeric",month:"short",year:"numeric"}, month:{month:"long",year:"numeric"} };
-    nodes.forEach(function (node) { var date = new Date(node.getAttribute("datetime")); if (isNaN(date)) return; var style=node.dataset.format||"long"; try { node.textContent=new Intl.DateTimeFormat(t("date.locale"),opts[style]||opts.long).format(date); } catch(e){} });
+    var nodes=document.querySelectorAll("time[datetime][data-format]");if(!nodes.length)return;
+    var opts={long:{day:"numeric",month:"long",year:"numeric"},short:{day:"numeric",month:"short",year:"numeric"},month:{month:"long",year:"numeric"}};
+    nodes.forEach(function(node){var date=new Date(node.getAttribute("datetime"));if(isNaN(date))return;var style=node.dataset.format||"long";try{node.textContent=new Intl.DateTimeFormat(t("date.locale"),opts[style]||opts.long).format(date);}catch(e){}});
   }
 
   function initFilters() {
-    var bar=document.querySelector(".filters"),list=document.getElementById("projects"); if(!bar||!list)return;
+    var bar=document.querySelector(".filters"),list=document.getElementById("projects");if(!bar||!list)return;
     var cards=Array.prototype.slice.call(list.querySelectorAll(".project")),buttons=Array.prototype.slice.call(bar.querySelectorAll(".filter")),empty=document.getElementById("projects-empty");
     buttons.forEach(function(btn){var value=btn.dataset.filter,n=value==="all"?cards.length:cards.filter(function(c){return c.dataset.category===value;}).length,slot=btn.querySelector(".filter-count");if(slot)slot.textContent=n;});
     function apply(value){var shown=0;cards.forEach(function(card){var match=value==="all"||card.dataset.category===value;card.hidden=!match;if(match)shown++;});buttons.forEach(function(btn){btn.setAttribute("aria-pressed",String(btn.dataset.filter===value));});if(empty)empty.hidden=shown>0;}
