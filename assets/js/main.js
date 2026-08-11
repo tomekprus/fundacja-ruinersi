@@ -9,15 +9,6 @@
 (function () {
   "use strict";
 
-  /* Accessibility overrides are deliberately isolated in a small stylesheet
-     so contrast and focus rules are easy to review independently. */
-  if (!document.querySelector('link[href="assets/css/accessibility.css"]')) {
-    var a11yStyles = document.createElement("link");
-    a11yStyles.rel = "stylesheet";
-    a11yStyles.href = "assets/css/accessibility.css";
-    document.head.appendChild(a11yStyles);
-  }
-
   var I18N = {
     pl: {
       "form.error.required": "To pole jest wymagane.",
@@ -41,9 +32,17 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  function initAccessibility() {
-    var main = document.getElementById("main");
-    if (main && !main.hasAttribute("tabindex")) main.setAttribute("tabindex", "-1");
+  function initRetiredLinks() {
+    document.querySelectorAll('.nav a[href="aktualnosci.html"]').forEach(function (link) {
+      var item = link.closest("li");
+      if (item) item.remove();
+      else link.remove();
+    });
+    document.querySelectorAll('a[href="zloty.html"]').forEach(function (link) {
+      var item = link.closest("li");
+      if (item && item.closest(".site-foot")) item.remove();
+      else link.remove();
+    });
   }
 
   function initNav() {
@@ -54,8 +53,9 @@
     var mobileQuery = window.matchMedia("(max-width: 1240px)");
 
     function syncInert() {
-      var open = toggle.getAttribute("aria-expanded") === "true";
-      nav.inert = mobileQuery.matches && !open;
+      var isOpen = toggle.getAttribute("aria-expanded") === "true";
+      if (mobileQuery.matches && !isOpen) nav.setAttribute("inert", "");
+      else nav.removeAttribute("inert");
     }
 
     function close() {
@@ -64,16 +64,11 @@
       syncInert();
     }
 
-    function open() {
-      toggle.setAttribute("aria-expanded", "true");
-      nav.setAttribute("data-open", "true");
-      syncInert();
-    }
-
     toggle.addEventListener("click", function () {
-      var isOpen = toggle.getAttribute("aria-expanded") === "true";
-      if (isOpen) close();
-      else open();
+      var open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      nav.setAttribute("data-open", String(!open));
+      syncInert();
     });
 
     document.addEventListener("keydown", function (e) {
@@ -83,18 +78,8 @@
       }
     });
 
-    if (typeof mobileQuery.addEventListener === "function") {
-      mobileQuery.addEventListener("change", function () {
-        if (!mobileQuery.matches) close();
-        else syncInert();
-      });
-    } else {
-      window.addEventListener("resize", function () {
-        if (window.innerWidth > 1240) close();
-        else syncInert();
-      });
-    }
-
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener("change", syncInert);
+    else mobileQuery.addListener(syncInert);
     syncInert();
   }
 
@@ -149,9 +134,7 @@
 
     buttons.forEach(function (btn) {
       var value = btn.dataset.filter;
-      var n = value === "all"
-        ? cards.length
-        : cards.filter(function (c) { return c.dataset.category === value; }).length;
+      var n = value === "all" ? cards.length : cards.filter(function (c) { return c.dataset.category === value; }).length;
       var slot = btn.querySelector(".filter-count");
       if (slot) slot.textContent = n;
     });
@@ -194,9 +177,7 @@
             if (input.required && !input.checked) {
               setError(input, t("form.error.required"));
               ok = false;
-            } else {
-              setError(input, "");
-            }
+            } else setError(input, "");
             return;
           }
 
@@ -207,9 +188,7 @@
           } else if (input.type === "email" && value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
             setError(input, t("form.error.email"));
             ok = false;
-          } else {
-            setError(input, "");
-          }
+          } else setError(input, "");
         });
         return ok;
       }
@@ -223,7 +202,6 @@
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-
         if (!validate()) {
           if (status) status.textContent = t("form.error.summary");
           var first = form.querySelector('[aria-invalid="true"]');
@@ -246,13 +224,8 @@
         if (subjectField) lines.push("Temat: " + subjectField.value.trim());
         if (wiadomosc) lines.push("", "Wiadomość:", wiadomosc.value.trim());
 
-        window.location.href = "mailto:" + address +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(lines.join("\r\n"));
-
-        if (status) {
-          status.textContent = t("form.sending") + " " + t("form.fallback", { email: address });
-        }
+        window.location.href = "mailto:" + address + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(lines.join("\r\n"));
+        if (status) status.textContent = t("form.sending") + " " + t("form.fallback", { email: address });
       });
     });
   }
@@ -269,7 +242,7 @@
   }
 
   ready(function () {
-    initAccessibility();
+    initRetiredLinks();
     initNav();
     initReveal();
     initDates();
