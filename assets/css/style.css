@@ -1183,9 +1183,16 @@ figure {
   max-width: 26ch;
 }
 
+/* Kafle obszarów działania.
+   Liczba kolumn jest ustalona na każdym progu, a nie dobierana przez auto-fit.
+   Powód: kreski rysujemy względem pozycji kafla w rzędzie, a przy auto-fit
+   nie da się trafić selektorem w pierwszy kafel kolejnego rzędu — drugi rząd
+   dostawał wtedy zbłąkaną pionową kreskę i był wcięty względem pierwszego.
+   Bloki mają od 4 do 8 kafli, więc rzędy bywają niepełne — to jest w porządku. */
+
 .areas {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
   border-top: 1px solid var(--graphite);
 }
@@ -1195,9 +1202,15 @@ figure {
   border-left: 1px solid var(--rule);
 }
 
-.area:first-child {
+/* pierwszy kafel w rzędzie: bez kreski, wyrównany do lewej krawędzi kolumny tekstu */
+.areas > .area:nth-child(4n+1) {
   border-left: 0;
   padding-left: 0;
+}
+
+/* drugi i kolejne rzędy oddzielone poziomą kreską */
+.areas > .area:nth-child(n+5) {
+  border-top: 1px solid var(--rule);
 }
 
 .area .h3 {
@@ -1210,13 +1223,34 @@ figure {
   line-height: 1.6;
 }
 
+@media(max-width:1080px) {
+  .areas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .areas > .area {
+    border-left: 1px solid var(--rule);
+    border-top: 0;
+    padding-left: clamp(1.25rem,2vw,1.75rem);
+  }
+  .areas > .area:nth-child(2n+1) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .areas > .area:nth-child(n+3) {
+    border-top: 1px solid var(--rule);
+  }
+}
+
 @media(max-width:780px) {
-  .area {
+  .areas {
+    grid-template-columns: 1fr;
+  }
+  .areas > .area {
     border-left: 0;
     border-top: 1px solid var(--rule);
     padding-inline: 0;
   }
-  .area:first-child {
+  .areas > .area:first-child {
     border-top: 0;
   }
 }
