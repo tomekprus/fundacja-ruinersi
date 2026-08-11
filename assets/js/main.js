@@ -10,53 +10,37 @@
   function initContentAdjustments(){
     var path=window.location.pathname.split("/").pop()||"index.html";
     var brandText=document.querySelector(".brand-text");if(brandText)brandText.innerHTML="<b>Fundacja Ruinersi</b><small>na Dolnym Śląsku</small>";
-    if(path==="index.html"||path==="")document.querySelectorAll("main > section").forEach(function(section){var eyebrow=section.querySelector(".eyebrow");if(eyebrow&&eyebrow.textContent.trim()==="Aktualności")section.remove();});
     if(path==="o-fundacji.html"){
       var awardPhoto=document.querySelector(".award-photo");
       if(awardPhoto){var awardFeature=awardPhoto.closest(".project-feature");if(awardFeature){awardFeature.style.borderBottom="0";awardFeature.style.paddingBottom="0";awardFeature.style.marginBottom="0";}}
       document.querySelectorAll("#ludzie .person").forEach(function(card){var heading=card.querySelector("h3");if(!heading)return;var name=heading.textContent.trim();if(name==="Tomasz Prus"){var ps=card.querySelectorAll("p");if(ps.length>1)ps[1].textContent="Odpowiada za komunikację i rozwój organizacyjny Fundacji. Inżynier elektronik i specjalista IT, zajmujący się zarządzaniem zespołami projektowymi i dokumentacją techniczną. Pasjonat dziedzictwa Dolnego Śląska. Od 2024 roku odnawia poniemieckie siedlisko w Złotym Potoku.";}});
     }
   }
-  function initGlobalNavLinks(){var list=document.querySelector("#nav > ul");if(!list)return;var path=window.location.pathname.split("/").pop()||"index.html";var navItems=[{href:"index.html",label:"Strona główna"},{href:"o-fundacji.html",label:"O Fundacji"},{href:"aktualnosci.html",label:"Aktualności"},{href:"klaster.html",label:"Klaster"},{href:"projekty.html",label:"Projekty"},{href:"materialy-edukacyjne.html",label:"Materiały edukacyjne"},{href:"media.html",label:"Media"},{href:"kontakt.html",label:"Kontakt"}];var itemsByHref={};Array.prototype.slice.call(list.querySelectorAll("li")).forEach(function(item){var link=item.querySelector("a[href]");if(link)itemsByHref[link.getAttribute("href")]=item;});navItems.forEach(function(entry){var item=itemsByHref[entry.href],link;if(!item){item=document.createElement("li");link=document.createElement("a");link.href=entry.href;link.textContent=entry.label;item.appendChild(link);}else{link=item.querySelector("a[href]");link.textContent=entry.label;}if(path===entry.href||(path===""&&entry.href==="index.html"))link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");list.appendChild(item);});}
+  function initGlobalNavLinks(){
+    var list=document.querySelector("#nav > ul");if(!list)return;
+    var path=window.location.pathname.split("/").pop()||"index.html";
+    var navItems=[
+      {href:"index.html",label:"Strona główna"},
+      {href:"o-fundacji.html",label:"O Fundacji"},
+      {href:"spolecznosc.html",label:"Społeczność"},
+      {href:"klaster.html",label:"Klaster"},
+      {href:"projekty.html",label:"Projekty"},
+      {href:"wiedza.html",label:"Wiedza"},
+      {href:"aktualnosci.html",label:"Aktualności"},
+      {href:"media.html",label:"Media"},
+      {href:"wesprzyj.html",label:"Wesprzyj nas"},
+      {href:"kontakt.html",label:"Kontakt"}
+    ];
+    var itemsByHref={};Array.prototype.slice.call(list.querySelectorAll("li")).forEach(function(item){var link=item.querySelector("a[href]");if(link)itemsByHref[link.getAttribute("href")]=item;});
+    list.innerHTML="";
+    navItems.forEach(function(entry){var item=itemsByHref[entry.href]||document.createElement("li"),link=item.querySelector("a[href]")||document.createElement("a");link.href=entry.href;link.textContent=entry.label;if(!link.parentNode)item.appendChild(link);if(path===entry.href||(path===""&&entry.href==="index.html"))link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");list.appendChild(item);});
+    var cta=document.querySelector(".nav-cta");if(cta)cta.style.display="none";
+  }
   function initNav(){var toggle=document.querySelector(".nav-toggle"),nav=document.getElementById("nav");if(!toggle||!nav)return;function close(){toggle.setAttribute("aria-expanded","false");nav.setAttribute("data-open","false");}toggle.addEventListener("click",function(){var open=toggle.getAttribute("aria-expanded")==="true";toggle.setAttribute("aria-expanded",String(!open));nav.setAttribute("data-open",String(!open));});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&toggle.getAttribute("aria-expanded")==="true"){close();toggle.focus();}});window.addEventListener("resize",function(){if(window.innerWidth>1080)close();});}
   function initReveal(){var items=document.querySelectorAll(".reveal");if(!items.length)return;if(reduceMotion||!("IntersectionObserver" in window)){items.forEach(function(el){el.classList.add("in");});return;}var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;entry.target.classList.add("in");io.unobserve(entry.target);});},{rootMargin:"0px 0px -6% 0px",threshold:.06});items.forEach(function(el){io.observe(el);});}
   function initDates(){var nodes=document.querySelectorAll("time[datetime][data-format]");if(!nodes.length)return;var opts={long:{day:"numeric",month:"long",year:"numeric"},short:{day:"numeric",month:"short",year:"numeric"},month:{month:"long",year:"numeric"}};nodes.forEach(function(node){var date=new Date(node.getAttribute("datetime"));if(isNaN(date))return;var style=node.dataset.format||"long";try{node.textContent=new Intl.DateTimeFormat(t("date.locale"),opts[style]||opts.long).format(date);}catch(e){}});}
   function initFilters(){var bar=document.querySelector(".filters"),list=document.getElementById("projects");if(!bar||!list)return;var cards=Array.prototype.slice.call(list.querySelectorAll(".project")),buttons=Array.prototype.slice.call(bar.querySelectorAll(".filter")),empty=document.getElementById("projects-empty");buttons.forEach(function(btn){var value=btn.dataset.filter,n=value==="all"?cards.length:cards.filter(function(c){return c.dataset.category===value;}).length,slot=btn.querySelector(".filter-count");if(slot)slot.textContent=n;});function apply(value){var shown=0;cards.forEach(function(card){var match=value==="all"||card.dataset.category===value;card.hidden=!match;if(match)shown++;});buttons.forEach(function(btn){btn.setAttribute("aria-pressed",String(btn.dataset.filter===value));});if(empty)empty.hidden=shown>0;}bar.addEventListener("click",function(e){var btn=e.target.closest(".filter");if(btn)apply(btn.dataset.filter);});apply("all");}
-  function initForms(){
-    document.querySelectorAll("form[data-mailto]").forEach(function(form){
-      var status=form.querySelector(".form-status");
-      function setError(input,message){var slot=form.querySelector('[data-error-for="'+input.name+'"]');if(slot)slot.textContent=message||"";input.setAttribute("aria-invalid",message?"true":"false");}
-      function validate(){var ok=true;form.querySelectorAll("[name]").forEach(function(input){var value=(input.value||"").trim();if(input.required&&!value){setError(input,t("form.error.required"));ok=false;}else if(input.type==="email"&&value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,t("form.error.email"));ok=false;}else setError(input,"");});return ok;}
-      form.addEventListener("input",function(e){if(e.target.getAttribute("aria-invalid")==="true")validate();});
-      form.addEventListener("submit",function(e){
-        e.preventDefault();
-        if(!validate()){if(status)status.textContent=t("form.error.summary");var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}
-        var address=form.dataset.mailto;
-        var subjectField=form.querySelector('[name="temat"]');
-        var subject=(subjectField&&subjectField.value.trim())||form.dataset.subject||"";
-        var nameField=form.querySelector('[name="imie"]');
-        var emailField=form.querySelector('[name="email"]');
-        var messageField=form.querySelector('[name="wiadomosc"]');
-        var body;
-        if(messageField){
-          body=[
-            "Imię: "+(nameField?nameField.value.trim():""),
-            "E-mail: "+(emailField?emailField.value.trim():""),
-            "",
-            "Wiadomość:",
-            messageField.value.trim()
-          ].join("\r\n");
-        }else{
-          var lines=[];
-          form.querySelectorAll("[name]").forEach(function(input){var label=form.querySelector('label[for="'+input.id+'"]');lines.push((label?label.textContent.trim():input.name)+": "+input.value.trim());});
-          body=lines.join("\r\n\r\n");
-        }
-        var mailto="mailto:"+address+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
-        window.location.assign(mailto);
-        if(status)status.textContent=t("form.sending")+" "+t("form.fallback",{email:address});
-      });
-    });
-  }
+  function initForms(){document.querySelectorAll("form[data-mailto]").forEach(function(form){var status=form.querySelector(".form-status");function setError(input,message){var slot=form.querySelector('[data-error-for="'+input.name+'"]');if(slot)slot.textContent=message||"";input.setAttribute("aria-invalid",message?"true":"false");}function validate(){var ok=true;form.querySelectorAll("[name]").forEach(function(input){if(input.type==="checkbox"&&input.required&&!input.checked){setError(input,t("form.error.required"));ok=false;return;}var value=(input.value||"").trim();if(input.required&&!value){setError(input,t("form.error.required"));ok=false;}else if(input.type==="email"&&value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,t("form.error.email"));ok=false;}else setError(input,"");});return ok;}form.addEventListener("input",function(e){if(e.target.getAttribute("aria-invalid")==="true")validate();});form.addEventListener("submit",function(e){e.preventDefault();if(!validate()){if(status)status.textContent=t("form.error.summary");var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}var address=form.dataset.mailto,subjectField=form.querySelector('[name="temat"]'),subject=(subjectField&&subjectField.value.trim())||form.dataset.subject||"";var imie=form.querySelector('[name="imie"]'),email=form.querySelector('[name="email"]'),telefon=form.querySelector('[name="telefon"]'),wiadomosc=form.querySelector('[name="wiadomosc"]');var lines=[];if(imie)lines.push("Imię i nazwisko: "+imie.value.trim());if(email)lines.push("E-mail: "+email.value.trim());if(telefon&&telefon.value.trim())lines.push("Telefon: "+telefon.value.trim());if(subjectField)lines.push("Temat: "+subjectField.value.trim());if(wiadomosc)lines.push("","Wiadomość:",wiadomosc.value.trim());var body=lines.join("\r\n");window.location.href="mailto:"+address+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);if(status)status.textContent=t("form.sending")+" "+t("form.fallback",{email:address});});});}
   function initYear(){document.querySelectorAll("[data-year]").forEach(function(el){el.textContent=new Date().getFullYear();});}
   function ready(fn){if(document.readyState!=="loading")fn();else document.addEventListener("DOMContentLoaded",fn);}
   ready(function(){initContentAdjustments();initGlobalNavLinks();initNav();initReveal();initDates();initFilters();initForms();initYear();});
