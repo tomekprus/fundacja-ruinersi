@@ -1,1 +1,0 @@
-This temporary marker will be removed after binary blob upload.
