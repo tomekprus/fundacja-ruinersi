@@ -1,0 +1,27 @@
+/* Accessibility refinements — WCAG 2.2 AA
+   Kept separate from the core design system so contrast and focus rules
+   remain explicit and easy to audit. */
+
+:root {
+  /* >= 4.5:1 on the primary light surfaces for small supporting text. */
+  --graphite-faint: #6F695F;
+}
+
+/* Interactive controls need a visible boundary against the page surface. */
+.field input,
+.field select,
+.field textarea {
+  border-color: #81786A;
+}
+
+/* Keep keyboard focus highly visible on dark surfaces. */
+.dark :focus-visible,
+.site-foot :focus-visible {
+  outline-color: var(--plaster);
+}
+
+/* The skip-link target can receive programmatic focus without adding
+   an extra visual outline around the whole main content area. */
+main[tabindex="-1"]:focus {
+  outline: none;
+}
