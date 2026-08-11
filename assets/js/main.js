@@ -22,7 +22,6 @@
     var navItems=[
       {href:"index.html",label:"Strona główna"},
       {href:"o-fundacji.html",label:"O Fundacji"},
-      {href:"spolecznosc.html",label:"Społeczność"},
       {href:"klaster.html",label:"Klaster"},
       {href:"projekty.html",label:"Projekty"},
       {href:"wiedza.html",label:"Wiedza"},
