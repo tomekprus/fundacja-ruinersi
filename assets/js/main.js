@@ -32,6 +32,35 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function initCurrentAssets() {
+    var path = window.location.pathname.split("/").pop() || "index.html";
+
+    if (path === "klaster.html") {
+      var founderLogos = document.querySelectorAll(".founder-logos .founder-logo");
+      var assets = [
+        { index: 1, src: "assets/img/domowprzyslupowych.jpg", alt: "Fundacja Dolina Domów Przysłupowych" },
+        { index: 3, src: "assets/img/dom-kolodzieja.png", alt: "Stowarzyszenie Dom Kołodzieja" }
+      ];
+
+      assets.forEach(function (asset) {
+        var slot = founderLogos[asset.index];
+        if (!slot) return;
+        slot.classList.remove("ph");
+        slot.innerHTML = "";
+        var img = document.createElement("img");
+        img.src = asset.src;
+        img.alt = asset.alt;
+        img.loading = "lazy";
+        slot.appendChild(img);
+      });
+    }
+
+    if (path === "o-fundacji.html") {
+      var award = document.querySelector(".award-photo");
+      if (award) award.src = "assets/img/nagroda_ruinersi.jpg";
+    }
+  }
+
   function initRetiredLinks() {
     document.querySelectorAll('.nav a[href="aktualnosci.html"]').forEach(function (link) {
       var item = link.closest("li");
@@ -242,6 +271,7 @@
   }
 
   ready(function () {
+    initCurrentAssets();
     initRetiredLinks();
     initNav();
     initReveal();
