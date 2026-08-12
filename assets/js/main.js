@@ -64,7 +64,13 @@
     nodes.forEach(function(node){var parent=node.parentElement;if(!parent||parent.closest('script,style,pre,code,textarea,input,select,option'))return;var text=node.nodeValue;if(!text||!/[AaIiOoUuWwZz]\s+\S/.test(text))return;node.nodeValue=text.replace(/(^|[\s(\[{„”"'—–-])([AaIiOoUuWwZz])\s+(?=\S)/g,function(_,before,letter){return before+letter+'\u00A0';});});
   }
 
+  function initFooterDetails(){
+    var base=document.querySelector('.foot-base');if(!base||base.querySelector('.foot-details'))return;
+    var details=document.createElement('p');details.className='foot-details';details.innerHTML='REGON: 541276341 · NIP: 6131596172 · Adres: Radogoszcz 67A, 59-800 Lubań, Polska';base.appendChild(details);
+    var style=document.createElement('style');style.setAttribute('data-footer-details','');style.textContent='.foot-base{flex-wrap:wrap;gap:.5rem 1.5rem}.foot-details{flex-basis:100%;margin:0;font-size:.8rem;opacity:.8}';document.head.appendChild(style);
+  }
+
   function initYear(){document.querySelectorAll("[data-year]").forEach(function(el){el.textContent=new Date().getFullYear();});}
   function ready(fn){if(document.readyState!=="loading")fn();else document.addEventListener("DOMContentLoaded",fn);}
-  ready(function(){initCurrentAssets();initProjectAssets();initFoundationTimelineLinks();initPagePolish();initCommunityLinks();initNav();initReveal();initDates();initFilters();initForms();initSocialFooter();initContentPolish();initPolishWidows();initYear();});
+  ready(function(){initCurrentAssets();initProjectAssets();initFoundationTimelineLinks();initPagePolish();initCommunityLinks();initNav();initReveal();initDates();initFilters();initForms();initSocialFooter();initContentPolish();initFooterDetails();initPolishWidows();initYear();});
 })();
