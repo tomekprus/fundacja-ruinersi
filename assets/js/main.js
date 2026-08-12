@@ -32,11 +32,61 @@
       "II Zlot Ruinersów · Bukowiec":[{label:"Relacja",href:"https://muratordom.pl/remont-domu/przebudowa/drugi-zlot-ruinersow-palac-bukowiec-opanowali-pasjonaci-renowacji-starych-domow-aa-um7V-92h8-VJgH.html"}],
       "Doroczna Nagroda MKiDN":[{label:"Artykuł",href:"https://jeleniagora.naszemiasto.pl/ruinersi-doradzaja-jak-ratowac-i-remontowac-domy-przyslupowe-na-dolnym-slasku-docenila-to-ministra-kultury-i-dziedzictwa-narodowego/ar/c1p2-28123543"}],
       "Powołanie Ogólnopolskiego Klastra Społecznej Ochrony Dziedzictwa":[{label:"Artykuł",href:"https://muratordom.pl/remont-domu/przebudowa/ogolnopolski-klaster-spolecznej-ochrony-dziedzictwa-oni-opiekuja-sie-obiektami-historycznymi-na-ktore-nie-zwracaly-uwagi-urzedy-aa-fyjB-f2k4-5zBD.html"}],
-      "„Stare domy na Dolnym Śląsku…” · Lubomierz":[{label:"Wideo",href:"https://www.youtube.com/watch?v=Yyz4C2CJ49A"}],
+      "Stare domy na Dolnym Śląsku… · Lubomierz":[{label:"Wideo",href:"https://www.youtube.com/watch?v=Yyz4C2CJ49A"}],
       "Lokalnie budujemy przyszłość regionu":[{label:"Wideo",href:"https://www.youtube.com/watch?v=4exFCJeVyVU"}],
       "III Zlot Ruinersów · Lubomierz":[{label:"Relacja",href:"https://muratordom.pl/remont-domu/przebudowa/iii-zlot-ruinersow-w-lubomierzu-klasztorny-skwer-i-budynki-wypelnialy-dyskusje-porady-i-opowiesci-o-remontowanych-domach-takie-spotkania-dodaja-energii-mowili-uczestnicy-aa-Yzsi-sZcZ-BEgb.html"},{label:"Rozmowa",href:"https://muratordom.pl/remont-domu/przebudowa/remont-domu-im-niestraszny-maja-recepty-i-ludzi-ktorzy-wiedza-jak-to-robic-darek-borkowski-opowiada-o-ruinersach-i-ich-wplywie-na-remonty-na-dolnym-slasku-aa-wQPN-TVXa-W9Hw.html"},{label:"Wideo",href:"https://www.youtube.com/watch?v=FXv2UBRMsCE"}]
     };
-    document.querySelectorAll(".rows .row").forEach(function(row){var name=row.querySelector(".row-name"),action=row.querySelector(".row-action");if(!name||!action)return;if(name.textContent.trim()==="Spotkanie z DWKZ i gminami Związku Gmin „Kwisa”")name.textContent="Lokalnie budujemy przyszłość regionu";var links=resources[name.textContent.trim()];if(!links)return;action.innerHTML="";action.style.display="flex";action.style.flexWrap="wrap";action.style.gap=".35rem .75rem";action.style.justifyContent="flex-end";links.forEach(function(item){var link=document.createElement("a");link.href=item.href;link.target="_blank";link.rel="noopener noreferrer";link.textContent=item.label;action.appendChild(link);});});
+    document.querySelectorAll(".rows .row").forEach(function(row){
+      var name=row.querySelector(".row-name"),action=row.querySelector(".row-action");if(!name||!action)return;
+      var current=name.textContent.trim();
+      if(current.indexOf("Spotkanie z DWKZ i gminami Związku Gmin")===0){name.textContent="Lokalnie budujemy przyszłość regionu";current=name.textContent.trim();}
+      var links=resources[current];if(!links)return;
+      action.innerHTML="";action.classList.add("timeline-actions");
+      links.forEach(function(item){var link=document.createElement("a");link.href=item.href;link.target="_blank";link.rel="noopener noreferrer";link.textContent=item.label;action.appendChild(link);});
+    });
+  }
+
+  function initPagePolish(){
+    var path=window.location.pathname.split("/").pop()||"index.html";
+    var css=[];
+
+    if(path==="klaster.html"){
+      css.push(
+        '.founder-name a{display:inline-flex;align-items:center;gap:.35rem;text-decoration:none;transition:color .22s var(--ease),transform .22s var(--ease)}',
+        '.founder-name a::after{content:"↗";font-family:var(--font-body);font-size:.8em;font-weight:500;opacity:.5;transform:translate(0,0);transition:opacity .22s var(--ease),transform .22s var(--ease)}',
+        '.founder-name a:hover{color:var(--brick);transform:translateX(3px)}',
+        '.founder-name a:hover::after{opacity:1;transform:translate(2px,-2px)}',
+        '.founder-name a:focus-visible{color:var(--brick)}',
+        '@media(prefers-reduced-motion:reduce){.founder-name a,.founder-name a::after{transition:none}.founder-name a:hover,.founder-name a:hover::after{transform:none}}'
+      );
+    }
+
+    if(path==="o-fundacji.html"){
+      var historyHead=Array.prototype.find.call(document.querySelectorAll('.section-head .h2'),function(h){return h.textContent.trim()==='Najważniejsze momenty';});
+      if(historyHead){
+        var section=historyHead.closest('.section');
+        var rows=section&&section.querySelector('.rows');
+        if(rows)rows.classList.add('history-timeline');
+      }
+      css.push(
+        '.history-timeline{border-top:1px solid var(--graphite)}',
+        '.history-timeline .row{display:grid;grid-template-columns:8.5rem minmax(0,1fr) auto;grid-template-areas:"date title actions" "date desc actions";column-gap:clamp(1.25rem,3vw,2.5rem);row-gap:.28rem;align-items:start;padding:1.3rem 0;border-bottom:1px solid var(--rule)}',
+        '.history-timeline .row-year{grid-area:date;font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--brick);font-variant-numeric:tabular-nums;padding-top:.15rem}',
+        '.history-timeline .row-name{grid-area:title;font-family:var(--font-display);font-size:clamp(1.02rem,.98rem + .2vw,1.16rem);font-weight:700;line-height:1.25;min-width:0}',
+        '.history-timeline .row-desc{grid-area:desc;color:var(--graphite-soft);font-size:var(--fs-small);line-height:1.5;min-width:0}',
+        '.history-timeline .row-action{grid-area:actions;align-self:center;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.35rem .85rem;max-width:15rem}',
+        '.history-timeline .row-action:empty{display:none}',
+        '.history-timeline .row-action a{display:inline-flex;align-items:center;gap:.3rem;color:var(--brick);font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:transform .2s var(--ease),color .2s var(--ease)}',
+        '.history-timeline .row-action a::after{content:"↗";font-size:.85em;opacity:.65;transition:transform .2s var(--ease),opacity .2s var(--ease)}',
+        '.history-timeline .row-action a:hover{color:var(--brick-deep);transform:translateX(2px)}',
+        '.history-timeline .row-action a:hover::after{opacity:1;transform:translate(1px,-1px)}',
+        '@media(max-width:860px){.history-timeline .row{grid-template-columns:7rem minmax(0,1fr);grid-template-areas:"date title" "date desc" "date actions"}.history-timeline .row-action{justify-content:flex-start;max-width:none;margin-top:.35rem}}',
+        '@media(max-width:560px){.history-timeline .row{grid-template-columns:1fr;grid-template-areas:"date" "title" "desc" "actions";row-gap:.4rem}.history-timeline .row-year{padding-top:0}.history-timeline .row-action{margin-top:.3rem}}',
+        '@media(prefers-reduced-motion:reduce){.history-timeline .row-action a,.history-timeline .row-action a::after{transition:none}.history-timeline .row-action a:hover,.history-timeline .row-action a:hover::after{transform:none}}'
+      );
+    }
+
+    if(css.length){var style=document.createElement('style');style.setAttribute('data-page-polish','');style.textContent=css.join('\n');document.head.appendChild(style);}
   }
 
   function initCommunityLinks(){
@@ -67,5 +117,5 @@
 
   function initYear(){document.querySelectorAll("[data-year]").forEach(function(el){el.textContent=new Date().getFullYear();});}
   function ready(fn){if(document.readyState!=="loading")fn();else document.addEventListener("DOMContentLoaded",fn);}
-  ready(function(){initCurrentAssets();initFoundationTimelineLinks();initCommunityLinks();initNav();initReveal();initDates();initFilters();initForms();initSocialFooter();initYear();});
+  ready(function(){initCurrentAssets();initFoundationTimelineLinks();initPagePolish();initCommunityLinks();initNav();initReveal();initDates();initFilters();initForms();initSocialFooter();initYear();});
 })();
