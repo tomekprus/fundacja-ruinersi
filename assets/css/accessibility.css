@@ -25,3 +25,9 @@
 main[tabindex="-1"]:focus {
   outline: none;
 }
+
+/* The award feature is already visually complete; avoid a large empty
+   tail before the divider introducing the people section. */
+.award-section {
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
