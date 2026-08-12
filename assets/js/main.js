@@ -182,18 +182,8 @@
     });
   }
 
-  function initRetiredLinks() {
-    document.querySelectorAll('.nav a[href="aktualnosci.html"]').forEach(function (link) {
-      var item = link.closest("li");
-      if (item) item.remove();
-      else link.remove();
-    });
-    document.querySelectorAll('a[href="zloty.html"]').forEach(function (link) {
-      var item = link.closest("li");
-      if (item && item.closest(".site-foot")) item.remove();
-      else link.remove();
-    });
-  }
+  /* initRetiredLinks() usunięta: odnośniki do wycofanych stron nie istnieją
+     już w HTML, więc nie ma czego wycinać w przeglądarce. */
 
   function initNav() {
     var toggle = document.querySelector(".nav-toggle"), nav = document.getElementById("nav");
@@ -355,7 +345,6 @@
     initCurrentAssets();
     initFoundationTimelineLinks();
     initCommunityLinks();
-    initRetiredLinks();
     initNav();
     initReveal();
     initDates();
