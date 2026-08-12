@@ -31,3 +31,14 @@ main[tabindex="-1"]:focus {
 .award-section {
   padding-bottom: clamp(2rem, 4vw, 3.5rem);
 }
+
+/* Give the full People of the Foundation section a clear visual ending
+   before the formal-data section begins. */
+#ludzie {
+  padding-bottom: clamp(8rem, 13vw, 12rem) !important;
+}
+
+/* On the Cluster page the documents block is intentionally not displayed. */
+main:has(.cluster-flow) > section:last-child {
+  display: none;
+}
