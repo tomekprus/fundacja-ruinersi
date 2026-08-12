@@ -68,6 +68,61 @@
     }
   }
 
+  function initFoundationTimelineLinks() {
+    var path = window.location.pathname.split("/").pop() || "index.html";
+    if (path !== "o-fundacji.html") return;
+
+    var resources = {
+      "II Zlot Ruinersów · Bukowiec": [
+        { label: "Relacja", href: "https://muratordom.pl/remont-domu/przebudowa/drugi-zlot-ruinersow-palac-bukowiec-opanowali-pasjonaci-renowacji-starych-domow-aa-um7V-92h8-VJgH.html" }
+      ],
+      "Doroczna Nagroda MKiDN": [
+        { label: "Artykuł", href: "https://jeleniagora.naszemiasto.pl/ruinersi-doradzaja-jak-ratowac-i-remontowac-domy-przyslupowe-na-dolnym-slasku-docenila-to-ministra-kultury-i-dziedzictwa-narodowego/ar/c1p2-28123543" }
+      ],
+      "Powołanie Ogólnopolskiego Klastra Społecznej Ochrony Dziedzictwa": [
+        { label: "Artykuł", href: "https://muratordom.pl/remont-domu/przebudowa/ogolnopolski-klaster-spolecznej-ochrony-dziedzictwa-oni-opiekuja-sie-obiektami-historycznymi-na-ktore-nie-zwracaly-uwagi-urzedy-aa-fyjB-f2k4-5zBD.html" }
+      ],
+      "„Stare domy na Dolnym Śląsku…” · Lubomierz": [
+        { label: "Wideo", href: "https://www.youtube.com/watch?v=Yyz4C2CJ49A" }
+      ],
+      "Lokalnie budujemy przyszłość regionu": [
+        { label: "Wideo", href: "https://www.youtube.com/watch?v=4exFCJeVyVU" }
+      ],
+      "III Zlot Ruinersów · Lubomierz": [
+        { label: "Relacja", href: "https://muratordom.pl/remont-domu/przebudowa/iii-zlot-ruinersow-w-lubomierzu-klasztorny-skwer-i-budynki-wypelnialy-dyskusje-porady-i-opowiesci-o-remontowanych-domach-takie-spotkania-dodaja-energii-mowili-uczestnicy-aa-Yzsi-sZcZ-BEgb.html" },
+        { label: "Rozmowa", href: "https://muratordom.pl/remont-domu/przebudowa/remont-domu-im-niestraszny-maja-recepty-i-ludzi-ktorzy-wiedza-jak-to-robic-darek-borkowski-opowiada-o-ruinersach-i-ich-wplywie-na-remonty-na-dolnym-slasku-aa-wQPN-TVXa-W9Hw.html" },
+        { label: "Wideo", href: "https://www.youtube.com/watch?v=FXv2UBRMsCE" }
+      ]
+    };
+
+    document.querySelectorAll(".rows .row").forEach(function (row) {
+      var name = row.querySelector(".row-name");
+      var action = row.querySelector(".row-action");
+      if (!name || !action) return;
+
+      if (name.textContent.trim() === "Spotkanie z DWKZ i gminami Związku Gmin „Kwisa”") {
+        name.textContent = "Lokalnie budujemy przyszłość regionu";
+      }
+
+      var links = resources[name.textContent.trim()];
+      if (!links) return;
+
+      action.innerHTML = "";
+      action.style.display = "flex";
+      action.style.flexWrap = "wrap";
+      action.style.gap = ".35rem .75rem";
+      action.style.justifyContent = "flex-end";
+      links.forEach(function (item) {
+        var link = document.createElement("a");
+        link.href = item.href;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = item.label;
+        action.appendChild(link);
+      });
+    });
+  }
+
   function initCommunityLinks() {
     var groups = [
       {
@@ -298,6 +353,7 @@
 
   ready(function () {
     initCurrentAssets();
+    initFoundationTimelineLinks();
     initCommunityLinks();
     initRetiredLinks();
     initNav();
