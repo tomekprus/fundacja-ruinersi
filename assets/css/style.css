@@ -1,1 +1,14 @@
-PLACEHOLDER
+@import url("https://raw.githubusercontent.com/tomekprus/fundacja-ruinersi/215ac2528afce62a5ab56fb8fdf687f146baaa8b/assets/css/style.css");
+
+/* Media — pięciu rozmówców: 3 osoby w pierwszym rzędzie, 2 w drugim. */
+@media (min-width: 861px) {
+  .section--tight .people--compact {
+    grid-template-columns: repeat(6,minmax(0,1fr));
+  }
+  .section--tight .people--compact > .person:nth-child(-n+3) {
+    grid-column: span 2;
+  }
+  .section--tight .people--compact > .person:nth-child(n+4) {
+    grid-column: span 3;
+  }
+}
