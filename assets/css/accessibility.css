@@ -42,3 +42,22 @@ main[tabindex="-1"]:focus {
 main:has(.cluster-flow) > section:last-child {
   display: none;
 }
+
+/* Homepage hero crop. */
+.hero .hero-photo {
+  aspect-ratio: 16 / 7 !important;
+}
+
+.hero .hero-photo img {
+  object-position: center 42% !important;
+}
+
+@media (max-width: 700px) {
+  .hero .hero-photo {
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  .hero .hero-photo img {
+    object-position: center center !important;
+  }
+}
