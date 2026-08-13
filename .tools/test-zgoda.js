@@ -151,10 +151,9 @@ console.log("\nTresc i interakcje paska:");
 {
   const win = freshEnv(); load(win).start();
   const html = pasek(win).innerHTML;
-  ok(html.indexOf("13 miesięcy") > -1, "tekst mowi o 13 miesiacach");
-  ok(html.indexOf("Google Analytics") > -1, "tekst nazywa narzedzie wprost");
-  ok(html.indexOf("USA") > -1, "tekst wspomina transfer do USA");
-  ok(html.indexOf("Bez zgody nie wczytujemy") > -1, "tekst mowi, ze odmowa cos znaczy");
+  ok(html.indexOf("Używamy ciasteczek") > -1, "pasek ma naglowek");
+  ok(html.indexOf("analizować ruch na stronie") > -1, "tekst wymienia cel analityczny");
+  ok(html.indexOf("Zgadzam się") > -1, "tekst odwoluje sie do przycisku zgody");
   ok(html.indexOf('href="prywatnosc.html"') > -1, "jest odnosnik do polityki prywatnosci");
   ok((html.match(/class="zgoda-btn"/g) || []).length === 2, "dokladnie dwa przyciski o identycznej klasie");
   ok(html.indexOf('data-zgoda="nie"') > -1 && html.indexOf('data-zgoda="tak"') > -1, "oba warianty decyzji obecne");
@@ -189,6 +188,19 @@ console.log("\nTresc i interakcje paska:");
   const win = freshEnv(); win.location.hash = "#zgoda";
   load(win).start();
   ok(pasek(win) !== null, "hash #zgoda otwiera pasek");
+}
+
+/* Pasek nie podaje juz czasu przechowywania, wiec ta informacja zyje wylacznie
+   w polityce prywatnosci. Pilnujemy, zeby nie rozjechala sie z kodem.        */
+console.log("\nSpojnosc polityki prywatnosci z kodem:");
+{
+  const polityka = fs.readFileSync(path.join(__dirname, "..", "prywatnosc.html"), "utf8");
+  const zgoda = fs.readFileSync(path.join(__dirname, "..", "assets", "js", "zgoda.js"), "utf8");
+  ok(polityka.indexOf("13 miesiącach") > -1, "polityka podaje 13 miesiecy");
+  ok(/COOKIE_EXPIRES = 34214400/.test(zgoda), "kod ustawia 34214400 s = 396 dni = 13 miesiecy");
+  ok(polityka.indexOf("Google Analytics") > -1, "polityka nazywa narzedzie");
+  ok(polityka.indexOf("Stanach Zjednoczonych") > -1, "polityka wspomina transfer do USA");
+  ok(polityka.indexOf("ruinersi-zgoda") > -1, "polityka opisuje zapis decyzji");
 }
 
 console.log("\n" + (failed ? "NIEPOWODZENIE" : "WSZYSTKO OK") + ": " + passed + " przeszlo, " + failed + " nie\n");

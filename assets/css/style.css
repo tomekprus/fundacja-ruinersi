@@ -1803,21 +1803,25 @@ a.row:hover {
 }
 
 .zgoda-text {
-  margin: 0;
   max-width: 68ch;
   font-size: var(--fs-small);
   line-height: 1.55;
   color: var(--graphite-soft);
 }
 
-.zgoda-eyebrow {
+.zgoda-text p {
+  margin: 0;
+}
+
+.zgoda-title {
   display: block;
-  margin-bottom: .3rem;
-  font-size: var(--fs-micro);
-  font-weight: var(--w-ui);
-  letter-spacing: .13em;
-  text-transform: uppercase;
-  color: var(--brick);
+  margin-bottom: .35rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  color: var(--graphite);
 }
 
 .zgoda-akcje {

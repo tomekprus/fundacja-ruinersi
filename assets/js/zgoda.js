@@ -14,12 +14,12 @@
 
   var TRESC =
     '<div class="zgoda-inner">' +
-      '<p class="zgoda-text">' +
-        '<span class="zgoda-eyebrow">Prywatność</span>' +
-        'Chcemy liczyć odwiedziny w Google Analytics — to zapisze identyfikator ' +
-        'Twojej przeglądarki na 13 miesięcy i wyśle dane do Google, także do USA. ' +
-        'Bez zgody nie wczytujemy tego skryptu.' +
-      '</p>' +
+      '<div class="zgoda-text">' +
+        '<strong class="zgoda-title">Używamy ciasteczek</strong>' +
+        '<p>Używamy plików cookie, aby poprawić jakość przeglądania oraz analizować ' +
+        'ruch na stronie. Kliknięcie przycisku „Zgadzam się” oznacza zgodę na ' +
+        'wykorzystywanie przez nas plików cookie.</p>' +
+      '</div>' +
       '<div class="zgoda-akcje">' +
         '<button type="button" class="zgoda-btn" data-zgoda="nie">Nie zgadzam się</button>' +
         '<button type="button" class="zgoda-btn" data-zgoda="tak">Zgadzam się</button>' +
