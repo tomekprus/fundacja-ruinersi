@@ -1,234 +1,250 @@
-# Fundacja Ruinersi na Dolnym Śląsku — prototyp strony
+# Strona Fundacji Ruinersi na Dolnym Śląsku
 
-Statyczna strona: czysty HTML + CSS + jeden plik JS. Bez build-stepu, bez zależności
-npm. Otwierasz plik w przeglądarce i widzisz stronę; wrzucasz katalog na GitHub
-i włączasz Pages — działa.
+Adres: **https://ruinersi.org**
 
-## Podgląd lokalny
+To zwykła strona z plików HTML. Nie ma tu żadnego systemu, wtyczek ani panelu
+administracyjnego. Otwierasz plik w edytorze, zmieniasz tekst, wysyłasz na
+GitHuba — po minucie widać zmianę na żywej stronie. Tyle.
 
-Formularze i daty działają też z `file://`, ale najbezpieczniej podnieść serwer:
+Taki wybór ma cenę i warto ją znać z góry: **nagłówek i stopka są skopiowane
+do każdego pliku osobno**. Jeśli zmieniasz coś w menu albo w stopce, musisz to
+zmienić w każdym pliku. W katalogu `.tools` są skrypty, które robią to za Ciebie
+(patrz niżej).
 
-```bash
+---
+
+## Jak obejrzeć stronę u siebie, zanim wyślesz zmiany
+
+Możesz po prostu kliknąć dwa razy na `index.html` i większość rzeczy zadziała.
+Ale niektóre elementy — baner cookies, przechodzenie między stronami — działają
+poprawnie tylko przez serwer. Postawienie go to jedna komenda w terminalu,
+w folderze z projektem:
+
+```
 python -m http.server 8765
-# http://localhost:8765
 ```
 
-## Struktura
+Potem wpisujesz w przeglądarce `http://localhost:8765`. Żeby zatrzymać, wracasz
+do terminala i naciskasz Ctrl+C.
+
+## Jak wysłać zmiany na stronę
 
 ```
-index.html                    Strona główna
-o-fundacji.html               O Fundacji (misja, ludzie, nagrody, partnerzy, dokumenty)
-klaster.html                  Klaster Dziedzictwa Dolnego Śląska
-projekty.html                 Lista projektów z filtrem kategorii
-projekt-zlot-ruinersow.html   Szablon strony projektu   → docelowo /projekty/[slug]
-aktualnosci.html              Archiwum aktualności
-aktualnosc-iii-zlot.html      Szablon artykułu          → docelowo /aktualnosci/[slug]
-kontakt.html                  Kontakt, dane Fundacji, FAQ
-wesprzyj.html                 Wsparcie (Patronite, przelew, praca)
-404.html                      Strona błędu
-sitemap.xml  robots.txt  .nojekyll
-
-assets/css/style.css          Cały arkusz stylów, podzielony na numerowane sekcje
-assets/js/main.js             Menu, daty (Intl), filtr projektów, formularze
-assets/img/logo-ruinersi.jpg  Logotyp pobrany z profilu Patronite fundacji
-```
-
-Nagłówek i stopka są powielone w każdym pliku — to cena za brak build-stepu.
-Zmieniasz nawigację? Zmień ją w każdym pliku HTML (albo przenieś projekt na
-generator statyczny, patrz „Dalsze kroki”).
-
----
-
-## 1. Czcionki — wymagają Twojego działania
-
-Projekt zakłada **Museo Slab 700** (nagłówki) i **Museo Sans 300** (tekst).
-To kroje komercyjne (exljbris) — **nie ma ich w Google Fonts** i nie wolno ich
-hostować bez licencji webfontowej.
-
-Do czasu ich dostarczenia strona renderuje się na zamiennikach z Google Fonts:
-**Bitter 700** i **Mulish 300**. Wygląda poprawnie, ale to nie jest docelowa typografia.
-
-Masz trzy drogi:
-
-**A. Pliki webfontów (kupione na myfonts.com / fonts.com)**
-
-Wrzuć do `assets/fonts/`:
-
-```
-MuseoSlab-700.woff2
-MuseoSans-300.woff2
-MuseoSans-500.woff2
-MuseoSans-700.woff2
-```
-
-Nic więcej nie trzeba — `@font-face` w sekcji 1a `style.css` już na nie wskazuje.
-
-**B. Adobe Fonts (Creative Cloud)**
-
-Museo Slab i Museo Sans są w bibliotece Adobe Fonts. Utwórz web project,
-usuń bloki `@font-face` z sekcji 1a i dodaj do `<head>` każdej strony:
-
-```html
-<link rel="stylesheet" href="https://use.typekit.net/TWÓJ-KIT.css">
-```
-
-**C. Zostaw zamienniki** — jeśli licencja jest poza budżetem.
-Wtedy warto usunąć `"Museo Slab"` i `"Museo Sans"` ze zmiennych
-`--font-display` / `--font-body`, żeby nie generować niepotrzebnych zapytań.
-
-Wagi w CSS są sterowane zmiennymi `--w-body: 300` i `--w-ui: 700`.
-
----
-
-## 2. Fotografie
-
-Prototyp nie zawiera zdjęć. W każdym miejscu, gdzie ma być fotografia, stoi blok
-z opisem oczekiwanego kadru:
-
-```html
-<figure class="ph ph--wide">
-  <figcaption class="ph-label">Fotografia — więźba dachowa, wymiana belki</figcaption>
-</figure>
-```
-
-Podmiana — zachowaj te same proporcje:
-
-```html
-<img src="assets/img/wiezba.jpg" alt="Cieśla dopasowuje nową belkę w więźbie dachowej"
-     width="1600" height="1067" loading="lazy">
-```
-
-Dostępne proporcje: `ph--banner` (24:9), `ph--wide` (16:9), `ph--photo` (3:2),
-`ph--square`, `ph--portrait` (4:5).
-
-Zdjęcia hero na górze strony **nie** oznaczaj `loading="lazy"`.
-Zapisuj w WebP lub AVIF, maksymalnie 1600–2000 px szerokości.
-
----
-
-## 3. Co trzeba uzupełnić przed publikacją
-
-Wszystkie miejsca z brakującymi danymi są oznaczone w kodzie klasą `todo`
-i widoczne na stronie jako czerwone plakietki. Szukaj `class="todo"`
-oraz atrybutu `data-todo`.
-
-| Gdzie | Co |
-|---|---|
-| `kontakt.html` | adres, KRS, NIP, REGON, osoba do kontaktu dla mediów |
-| `kontakt.html`, `klaster.html` | adresy e-mail (`kontakt@ruinersi.org`, `klaster@ruinersi.org`) |
-| `o-fundacji.html` | imiona, nazwiska, funkcje i biogramy zarządu i Rady |
-| `o-fundacji.html` | pliki PDF: statut, KRS, sprawozdania, standardy ochrony małoletnich |
-| `o-fundacji.html` | nagrody: rok, nazwa, link |
-| `klaster.html` | nazwy partnerów, lata przystąpienia, liczby w sekcji „w liczbach” |
-| `wesprzyj.html` | numer rachunku bankowego, rzeczywiste kwoty |
-| wszystkie stopki | adresy Facebooka, Instagrama, YouTube |
-| wszystkie stopki | polityka prywatności, informacja o cookies |
-| `index.html`, `sitemap.xml`, `robots.txt` | domena `ruinersi.example` → docelowa |
-
-Treści opisowe (misja, historia, opisy projektów, artykuł) są **przykładowe** —
-napisane tak, by wyglądały wiarygodnie i pokazywały docelową długość tekstu.
-Przeczytaj je i podmień na prawdziwe. Dane rejestrowe nie zostały zmyślone.
-
----
-
-## 4. Formularze
-
-Statyczny hosting nie wyśle maila. Formularze na `kontakt.html` i `klaster.html`
-walidują dane, a następnie składają wiadomość i otwierają program pocztowy
-(`mailto:`). To działa, ale jest niewygodne dla użytkownika.
-
-Przepięcie na Formspree (darmowy plan wystarczy na start):
-
-1. Załóż formularz na formspree.io, skopiuj jego endpoint.
-2. W `<form>` usuń `data-mailto` i dodaj:
-   ```html
-   <form class="form" action="https://formspree.io/f/TWÓJ-ID" method="POST">
-   ```
-3. Walidacja z `main.js` przestanie przechwytywać wysyłkę — przejmie ją Formspree.
-
----
-
-## 5. Publikacja na GitHub Pages
-
-Repozytorium git jest już zainicjowane, gałąź `main`, pierwszy commit zrobiony.
-Zostało tylko podpiąć zdalne repozytorium i wypchnąć.
-
-**1. Utwórz puste repozytorium na GitHubie** (github.com/new) — bez README,
-bez .gitignore, bez licencji. Inaczej push się odbije.
-
-**2. Podepnij je i wypchnij:**
-
-```bash
-cd C:\Users\prust\Documents\ruinersi-fundacja
-git remote add origin https://github.com/UŻYTKOWNIK/NAZWA-REPO.git
-git push -u origin main
-```
-
-**3. Włącz Pages:** w repozytorium **Settings → Pages → Source: Deploy from
-a branch → `main` / `/ (root)` → Save**. Po 1–2 minutach strona jest pod
-`https://UŻYTKOWNIK.github.io/NAZWA-REPO/`.
-
-Kolejne zmiany:
-
-```bash
 git add -A
-git commit -m "opis zmiany"
+git commit -m "krótki opis, co zmieniłem"
 git push
 ```
 
-Uwagi:
+Strona przebudowuje się sama, zwykle w ciągu minuty. Jeśli po kilku minutach nic
+się nie zmieniło, zajrzyj w zakładkę **Actions** na GitHubie — tam widać, czy
+publikacja się udała.
 
-- Plik `.nojekyll` jest w repo — bez niego GitHub przepuszcza pliki przez Jekyll.
-- Wszystkie ścieżki są względne, więc strona działa zarówno pod
-  `użytkownik.github.io/repo/`, jak i na własnej domenie. Nie trzeba nic zmieniać.
-- Chcesz adres bez podkatalogu? Nazwij repozytorium `UŻYTKOWNIK.github.io`.
-- Własna domena: dodaj plik `CNAME` z samą nazwą domeny i skonfiguruj DNS.
-- Przed publikacją podmień `ruinersi.example` w `sitemap.xml`, `robots.txt`
-  i w `<link rel="canonical">` w `index.html` na docelowy adres.
-
----
-
-## 6. Wielojęzyczność (PL / EN / DE / CS)
-
-Prototyp jest po polsku, ale przygotowany pod tłumaczenia:
-
-- teksty interfejsu i komunikaty formularzy siedzą w obiekcie `I18N` w `main.js`,
-  a nie w komponentach — dopisujesz klucze dla `en`, `de`, `cs`;
-- daty nigdy nie są składane z nazw miesięcy w kodzie. W HTML jest tylko
-  `<time datetime="2026-06-27" data-format="long">`, a formatowaniem zajmuje się
-  `Intl.DateTimeFormat` z locale pobranym z `<html lang>`;
-- układy są płynne, nagłówki mają miarę liczoną w `ch`, przyciski nie mają
-  sztywnych szerokości — dłuższe teksty niemieckie się zmieszczą;
-- przełącznik języka jest w stopce. Nieaktywne wersje **nie są linkami**,
-  więc nie ma martwych adresów;
-- Bitter i Mulish (oraz Museo) obsługują pełne latin-ext: `ą ć ę ł ń ó ś ź ż
-  ä ö ü ß č ď ě ň ř š ť ů ž`.
-
-Czego prototyp **nie** ma i co trzeba dorobić przy wdrażaniu tłumaczeń:
-routing per język, tłumaczone slugi (`/de/ueber-uns`), `hreflang`, wielojęzyczna
-sitemapa. W `index.html` i `sitemap.xml` są komentarze wskazujące, gdzie je wstawić.
+**Ważne:** zmiany w plikach CSS mogą się nie pokazać, bo przeglądarka trzyma
+stary arkusz w pamięci. Dlatego w każdym pliku HTML adres arkusza ma na końcu
+`?v=20260813-4`. Zmieniłeś CSS? Podbij tę datę **we wszystkich plikach naraz**
+(np. na `?v=20260814`), inaczej część odwiedzających zobaczy stary wygląd.
 
 ---
 
-## 7. Dostępność i wydajność
+## Co gdzie leży
 
-Zrobione: semantyczny HTML, poprawna hierarchia nagłówków, `lang="pl"`, skip link,
-widoczny focus, obsługa klawiatury, etykiety formularzy, komunikaty błędów
-powiązane przez `aria-describedby`, `role="alert"`, obsługa `prefers-reduced-motion`,
-brak funkcji zależnych wyłącznie od hover.
+| Plik | Co to jest |
+|---|---|
+| `index.html` | strona główna |
+| `o-fundacji.html` | misja, ludzie, historia, dane rejestrowe, dokumenty |
+| `klaster.html` | Ogólnopolski Klaster Społecznej Ochrony Dziedzictwa |
+| `projekty.html` | lista projektów |
+| `wiedza.html` | publikacje, materiały, mapa fachowców |
+| `media.html` | materiały dla mediów, kontakt prasowy |
+| `kontakt.html` | formularz i dane kontaktowe |
+| `wesprzyj.html` | wsparcie, Patronite, przelew |
+| `prywatnosc.html` | polityka prywatności i zmiana zgody na statystyki |
+| `404.html` | strona pokazywana przy błędnym adresie |
+| `aktualnosci.html` | **wyłączona** — pusta, oznaczona jako niewidoczna dla Google |
+| `materialy-edukacyjne.html` | tylko przekierowanie na `wiedza.html`, nie ruszaj |
 
-Do sprawdzenia po dodaniu prawdziwych zdjęć: kontrast tekstu na fotografiach,
-rozmiary plików, `srcset` dla dużych obrazów.
-
-Strona ładuje jeden arkusz CSS, jeden plik JS (~6 kB) i czcionki. Bez frameworka,
-bez bibliotek animacyjnych.
+```
+assets/css/style.css           cały wygląd strony, podzielony na numerowane sekcje
+assets/css/accessibility.css   poprawki kontrastu i obramowań — czytaj: dostępność
+assets/js/main.js              menu, daty, zdjęcia, odnośniki
+assets/js/zgoda.js             baner cookies i statystyki
+assets/img/                    zdjęcia i logotypy
+assets/docs/                   statut i odpis KRS w PDF
+CNAME                          nazwa domeny — nie usuwaj tego pliku
+sitemap.xml, robots.txt        informacje dla Google
+```
 
 ---
 
-## 8. Dalsze kroki
+## Rzeczy, które łatwo zepsuć
 
-Jeśli treści zacznie przybywać — a przy archiwum projektów i aktualności to
-kwestia miesięcy — powielanie nagłówka i stopki w każdym pliku przestanie się
-opłacać. Wtedy warto przenieść projekt na generator statyczny (Astro, Eleventy,
-Next.js z `output: 'export'`), zachowując ten sam CSS. Struktura HTML jest na to
-przygotowana: sekcje są niezależne, klasy nie zakładają konkretnej strony.
+### 1. Jedna literówka w JavaScripcie wyłącza pół strony
+
+To się już zdarzyło i warto wiedzieć, dlaczego. Cały `main.js` jest jedną wielką
+funkcją. Jeśli gdziekolwiek w środku będzie błąd składni, przeglądarka **nie
+wykona nic** z tego pliku — padnie menu na telefonie, formatowanie dat, część
+zdjęć i odnośników naraz. Nie zobaczysz komunikatu o błędzie; rzeczy po prostu
+przestaną się pojawiać.
+
+Dlatego **po każdej zmianie w plikach `.js`** uruchom to:
+
+```
+node --check assets/js/main.js
+node --check assets/js/zgoda.js
+```
+
+Jeśli nic nie wypisze — jest dobrze. Jeśli wypisze `SyntaxError` z numerem linii,
+nie wysyłaj zmian, dopóki tego nie naprawisz. To zajmuje dwie sekundy i raz już
+uratowałoby kilka tygodni pracy.
+
+### 2. Część treści jest w JavaScripcie, nie w HTML
+
+Niektóre zdjęcia, logotypy i odnośniki nie są wpisane w plikach HTML, tylko
+dodawane przez `main.js` już w przeglądarce. Jeśli szukasz jakiegoś tekstu
+w plikach HTML i go nie znajdujesz — poszukaj w `assets/js/main.js`.
+
+Docelowo lepiej to przenosić do HTML, kawałek po kawałku. Wszystko, co jest
+w HTML, jest odporne na awarie i widoczne dla Google.
+
+### 3. Zdjęcia bywają absurdalnie ciężkie
+
+Zdjęcia potrafią zaskoczyć wagą. Kiedyś jeden logotyp w tym projekcie
+ważył 12 MB przy wyświetlaniu w polu wielkości znaczka pocztowego. Zanim wrzucisz
+zdjęcie:
+
+- zapisz je w **WebP**, nie PNG (PNG ma sens tylko przy przezroczystym tle),
+- szerokość maksymalnie **1200 px** dla zwykłych zdjęć, **2000 px** dla dużego
+  zdjęcia na górze strony głównej,
+- celuj poniżej 200 kB na plik.
+
+Cały katalog `assets/img` waży teraz około 1,9 MB. Jeśli zacznie rosnąć do
+kilkunastu megabajtów, coś poszło nie tak.
+
+Nie używaj polskich znaków w nazwach plików — `jak_budować.png` powodował
+problemy w adresach. Pisz `jak-budowac.webp`.
+
+---
+
+## Baner cookies i statystyki
+
+Strona używa Google Analytics, ale **wyłącznie po zgodzie odwiedzającego**. Nie
+jest to kosmetyka: skrypt Google w ogóle nie trafia na stronę, dopóki ktoś nie
+kliknie „Zgadzam się". Kliknięcie „Nie zgadzam się" oznacza, że nie zostanie
+wczytany nigdy.
+
+Wszystko siedzi w `assets/js/zgoda.js` — celowo osobno od `main.js`, żeby awaria
+jednego nie unieruchamiała drugiego.
+
+Jeśli zmieniasz cokolwiek w tym pliku albo w polityce prywatności, uruchom:
+
+```
+node .tools/test-zgoda.js
+```
+
+Powinno wypisać `WSZYSTKO OK`. To 48 automatycznych sprawdzeń, między innymi
+tego, czy Google naprawdę nie wczytuje się przed zgodą i czy polityka
+prywatności nie rozjechała się z tym, co robi kod. Jeśli coś wypisze `FAIL`,
+przeczytaj opis — mówi wprost, co przestało się zgadzać.
+
+**Czego nie zmieniać bez zastanowienia:**
+
+- Oba przyciski wyglądają identycznie. To nie przypadek — wyróżnianie „Zgadzam
+  się" kolorem jest uznawane za manipulację i bywa podstawą kar.
+- Odnośnik „Prywatność" w stopce musi zostać. Prawo wymaga, żeby wycofanie zgody
+  było tak samo łatwe jak jej udzielenie, a to jedyne miejsce, gdzie się to da.
+- Polityka prywatności podaje nazwę Google Analytics, transfer danych do USA
+  i 13 miesięcy. Od kiedy baner mówi ogólnie o ciasteczkach, to jedyne miejsce,
+  gdzie te informacje występują.
+
+Jedna rzecz jest **poza tym projektem**: okres przechowywania danych ustawia się
+w panelu Google Analytics (Administracja → Ustawienia danych → Przechowywanie
+danych). Z plików tego nie zmienisz.
+
+---
+
+## Formularz kontaktowy
+
+Formularz wysyła wiadomości przez **Web3Forms** — darmową usługę pośredniczącą,
+bo sama strona z plików nie umie wysyłać maili. Klucz jest wpisany w
+`kontakt.html`. Jeśli wiadomości przestaną przychodzić, najpierw sprawdź
+skrzynkę na web3forms.com.
+
+## Czcionki
+
+Strona używa **Bitter** (nagłówki) i **Mulish** (tekst) z Google Fonts.
+
+Pierwotny projekt zakładał komercyjne kroje Museo Slab i Museo Sans. Zostały
+odpuszczone świadomie — licencja na użycie w sieci to osobny, płatny produkt,
+a dodatkowo to repozytorium jest publiczne, więc pliki czcionek mógłby pobrać
+każdy, na co większość licencji nie pozwala. Bitter i Mulish wyglądają dobrze
+i są darmowe. Sprawa zamknięta; nie ma po nich śladów w CSS.
+
+---
+
+## Skrypty pomocnicze w `.tools`
+
+Uruchamia się je z folderu projektu. **Bez** `--write` tylko pokazują, co by
+zmieniły — zawsze najpierw zobacz podgląd.
+
+```
+node .tools/set-site-url.js https://ruinersi.org --write
+```
+Ustawia adres strony we wszystkich plikach naraz: `canonical`, `og:url`,
+`sitemap.xml`, `robots.txt`. Przydaje się przy zmianie domeny. **Uwaga:** ten
+skrypt nie umie usunąć podkatalogu z adresów w `sitemap.xml` — po uruchomieniu
+zajrzyj do tego pliku i sprawdź, czy adresy wyglądają jak
+`https://ruinersi.org/kontakt.html`, a nie `https://ruinersi.org/cokolwiek/kontakt.html`.
+
+```
+node .tools/fix-nav.js --write
+node .tools/fix-footer.js --write
+node .tools/fix-retired-links.js --write
+```
+Wyrównują menu, stopkę i usuwają odnośniki do stron, których już nie ma —
+we wszystkich plikach naraz. Używaj po dodaniu lub usunięciu strony.
+
+```
+node .tools/format-css.js --write
+```
+Porządkuje formatowanie `style.css`.
+
+```
+node .tools/test-zgoda.js
+```
+Sprawdza baner cookies (opisane wyżej).
+
+---
+
+## Co jeszcze zostało do zrobienia
+
+W kodzie są **czerwone plakietki „do uzupełnienia"** — widać je na żywej
+stronie, więc warto się ich pozbyć. Szukaj `class="todo"`:
+
+| Gdzie | Ile | Czego brakuje |
+|---|---|---|
+| `media.html` | 4 | paczka z logotypami i materiałami dla mediów |
+| `klaster.html` | 2 | dokumenty Klastra |
+| `o-fundacji.html` | 1 | sprawozdania i standardy ochrony małoletnich |
+| `wiedza.html` | 1 | okładka i link do jednej z publikacji |
+
+Poza tym:
+
+- W stopce nie ma odnośników do Facebooka i Instagrama w HTML — dodaje je
+  `main.js`. Lepiej byłoby wpisać je normalnie.
+- Statut i odpis KRS są już podpięte na `o-fundacji.html`.
+- Strona `aktualnosci.html` jest pusta i wyłączona. Jeśli kiedyś wróci, jej
+  poprzednia treść jest w historii Gita.
+
+## Gdyby treści bardzo przybyło
+
+Kopiowanie nagłówka i stopki do każdego pliku przestanie się opłacać, kiedy stron
+będzie kilkadziesiąt. Wtedy warto przenieść projekt na generator stron
+(Astro, Eleventy) — CSS można zabrać bez zmian, bo nic w nim nie zakłada
+konkretnej strony. Ale przy dzisiejszych dwunastu plikach to byłoby dodawanie
+sobie pracy.
+
+## Notatki z decyzji
+
+W `docs/superpowers/` leżą zapiski z ustaleń — dlaczego baner cookies wygląda
+tak, a nie inaczej, i co po drodze odrzucono. Jeśli kiedyś zastanowisz się
+„dlaczego to zrobiono w ten sposób", odpowiedź jest prawdopodobnie tam.

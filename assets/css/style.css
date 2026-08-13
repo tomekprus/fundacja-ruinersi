@@ -1,42 +1,10 @@
 /* =========================================================================
-   Fundacja Ruinersi na Dolnym Śląsku — arkusz stylów prototypu
+   Fundacja Ruinersi na Dolnym Śląsku — arkusz stylów
 
    Paleta wyprowadzona z logotypu fundacji:
      tynk wapienny #F5F0E7 · tło logotypu #EADED0 · grafit #22201C
      przygaszona cegła #9A4B2C · brąz drewna #7A5233 · ciemna zieleń #2B3A2E
    ========================================================================= */
-
-@font-face {
-  font-family: "Museo Slab";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: local("Museo Slab 700"),local("MuseoSlab-700"),local("MuseoSlab700"),url("../fonts/MuseoSlab-700.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-  src: local("Museo Sans 300"),local("MuseoSans-300"),local("MuseoSans300"),url("../fonts/MuseoSans-300.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-  src: local("Museo Sans 500"),local("MuseoSans-500"),local("MuseoSans500"),url("../fonts/MuseoSans-500.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Museo Sans";
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-  src: local("Museo Sans 700"),local("MuseoSans-700"),local("MuseoSans700"),url("../fonts/MuseoSans-700.woff2") format("woff2");
-}
 
 :root {
   --plaster: #F5F0E7;
@@ -52,8 +20,8 @@
   --forest-deep: #202B22;
   --rule: #DCD2C1;
   --rule-firm: #C3B7A2;
-  --font-display: "Museo Slab","Bitter","Iowan Old Style",Georgia,serif;
-  --font-body: "Museo Sans","Mulish","Segoe UI",system-ui,-apple-system,sans-serif;
+  --font-display: "Bitter","Iowan Old Style",Georgia,serif;
+  --font-body: "Mulish","Segoe UI",system-ui,-apple-system,sans-serif;
   --w-body: 300;
   --w-ui: 700;
   --fs-hero: clamp(2.6rem,1rem + 6.1vw,5.4rem);
