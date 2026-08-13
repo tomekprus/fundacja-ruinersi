@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tomekprus.github.io/fundacja-ruinersi/sitemap.xml
+Sitemap: https://ruinersi.org/sitemap.xml

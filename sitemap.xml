@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/</loc><priority>1.0</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/o-fundacji.html</loc><priority>0.9</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/spolecznosc.html</loc><priority>0.9</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/klaster.html</loc><priority>0.9</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/projekty.html</loc><priority>0.8</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/wiedza.html</loc><priority>0.9</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/media.html</loc><priority>0.7</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/wesprzyj.html</loc><priority>0.7</priority></url>
-  <url><loc>https://tomekprus.github.io/fundacja-ruinersi/kontakt.html</loc><priority>0.7</priority></url>
+  <url><loc>https://ruinersi.org/</loc><priority>1.0</priority></url>
+  <url><loc>https://ruinersi.org/o-fundacji.html</loc><priority>0.9</priority></url>
+  <url><loc>https://ruinersi.org/klaster.html</loc><priority>0.9</priority></url>
+  <url><loc>https://ruinersi.org/projekty.html</loc><priority>0.8</priority></url>
+  <url><loc>https://ruinersi.org/wiedza.html</loc><priority>0.9</priority></url>
+  <url><loc>https://ruinersi.org/media.html</loc><priority>0.7</priority></url>
+  <url><loc>https://ruinersi.org/wesprzyj.html</loc><priority>0.7</priority></url>
+  <url><loc>https://ruinersi.org/kontakt.html</loc><priority>0.7</priority></url>
 </urlset>
