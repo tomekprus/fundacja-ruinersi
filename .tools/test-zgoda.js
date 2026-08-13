@@ -200,7 +200,8 @@ console.log("\nSpojnosc polityki prywatnosci z kodem:");
   ok(/COOKIE_EXPIRES = 34214400/.test(zgoda), "kod ustawia 34214400 s = 396 dni = 13 miesiecy");
   ok(polityka.indexOf("Google Analytics") > -1, "polityka nazywa narzedzie");
   ok(polityka.indexOf("Stanach Zjednoczonych") > -1, "polityka wspomina transfer do USA");
-  ok(polityka.indexOf("ruinersi-zgoda") > -1, "polityka opisuje zapis decyzji");
+  ok(polityka.indexOf('id="zmien-zgode"') > -1,
+     "polityka ma przycisk wycofania zgody (art. 7 ust. 3 RODO)");
 }
 
 console.log("\n" + (failed ? "NIEPOWODZENIE" : "WSZYSTKO OK") + ": " + passed + " przeszlo, " + failed + " nie\n");

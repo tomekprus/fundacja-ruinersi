@@ -16,9 +16,9 @@
     '<div class="zgoda-inner">' +
       '<div class="zgoda-text">' +
         '<strong class="zgoda-title">Używamy ciasteczek</strong>' +
-        '<p>Używamy plików cookie, aby poprawić jakość przeglądania oraz analizować ' +
-        'ruch na stronie. Kliknięcie przycisku „Zgadzam się” oznacza zgodę na ' +
-        'wykorzystywanie przez nas plików cookie.</p>' +
+        '<p>Używamy plików cookie, aby analizować ruch na stronie. Kliknięcie ' +
+        'przycisku „Zgadzam się” oznacza zgodę na wykorzystywanie przez nas ' +
+        'plików cookie.</p>' +
       '</div>' +
       '<div class="zgoda-akcje">' +
         '<button type="button" class="zgoda-btn" data-zgoda="nie">Nie zgadzam się</button>' +
