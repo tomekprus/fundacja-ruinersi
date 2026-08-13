@@ -1,0 +1,1 @@
+Trigger GitHub Pages rebuild after adding Statut Fundacji and KRS links. 2026-08-13 11:39 CEST
