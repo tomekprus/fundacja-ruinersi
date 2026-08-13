@@ -1776,3 +1776,94 @@ a.row:hover {
     padding-block: 1.5rem;
   }
 }
+
+/* ---------------------------------------------------------------
+   14. Pasek zgody na statystyki
+   Oba przyciski mają identyczny styl. Wyróżnienie „Zgadzam się”
+   kolorem byłoby ciemnym wzorcem i podważało ważność zgody.
+   --------------------------------------------------------------- */
+
+.zgoda {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 60;
+  background: var(--plaster);
+  border-top: 1px solid var(--graphite);
+  box-shadow: 0 -12px 32px color-mix(in srgb,var(--graphite) 12%,transparent);
+}
+
+.zgoda-inner {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding: clamp(.9rem,2vw,1.35rem) var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem,3vw,2.5rem);
+}
+
+.zgoda-text {
+  margin: 0;
+  max-width: 68ch;
+  font-size: var(--fs-small);
+  line-height: 1.55;
+  color: var(--graphite-soft);
+}
+
+.zgoda-eyebrow {
+  display: block;
+  margin-bottom: .3rem;
+  font-size: var(--fs-micro);
+  font-weight: var(--w-ui);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--brick);
+}
+
+.zgoda-akcje {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-left: auto;
+}
+
+.zgoda-btn {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: var(--w-ui);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--graphite);
+  background: transparent;
+  border: 1px solid var(--graphite);
+  padding: .7rem 1.15rem;
+  cursor: pointer;
+  transition: background .2s var(--ease),color .2s var(--ease);
+}
+
+.zgoda-btn:hover {
+  background: var(--graphite);
+  color: var(--plaster);
+}
+
+.zgoda-link {
+  font-size: var(--fs-micro);
+  font-weight: var(--w-ui);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--graphite-faint);
+  white-space: nowrap;
+}
+
+@media(max-width:860px) {
+  .zgoda-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .9rem;
+  }
+
+  .zgoda-akcje {
+    margin-left: 0;
+  }
+}
