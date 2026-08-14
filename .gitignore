@@ -16,3 +16,6 @@ $RECYCLE.BIN/
 # Pliki tymczasowe
 *.log
 *.tmp
+
+# Artefakt kontrolny formatowania HTML
+.tools/.snapshot.json

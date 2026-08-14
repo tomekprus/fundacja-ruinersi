@@ -215,6 +215,33 @@ Sprawdza baner cookies (opisane wyżej).
 
 ---
 
+## Formatowanie plików HTML
+
+Pliki HTML są sformatowane Prettierem. Żeby je poprawić po ręcznych zmianach:
+
+```
+npx prettier --write "*.html"
+```
+
+Ustawienia są w pliku `.prettierrc` i **nie podawaj ich w komendzie** — Prettier
+sam je odczyta. Jedno z nich, `printWidth: 500`, wygląda dziwnie i ma dobry
+powód, opisany w komentarzu w tym pliku: przy domyślnej szerokości 80 Prettier
+przełamuje wiersz w środku zdań, które `main.js` porównuje znak w znak. Efekt
+jest podstępny, bo nic się nie wysypuje — po prostu akapit, który miał zniknąć,
+zostaje na stronie, a odnośnik, który miał się pojawić, nie powstaje.
+
+Jeśli kiedyś będziesz zmieniać formatowanie, zrób to tak:
+
+```
+node .tools/html-snapshot.js zapisz     # przed
+npx prettier --write "*.html"
+node .tools/html-snapshot.js sprawdz    # po
+```
+
+Skrypt porównuje trzy rzeczy niezależne od formatowania: widoczny tekst,
+strukturę dokumentu z atrybutami oraz to, czy żadne ze zdań szukanych przez
+`main.js` nie zostało przełamane. Powinien wypisać `BEZ ZMIAN ZNACZENIOWYCH`.
+
 ## Co jeszcze zostało do zrobienia
 
 W kodzie są **czerwone plakietki „do uzupełnienia"** — widać je na żywej

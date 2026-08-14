@@ -1,0 +1,33 @@
+# Konfiguracja Prettiera dla plików HTML tej strony.
+#
+# NIE ZMIENIAJ printWidth NA MNIEJSZĄ WARTOŚĆ bez sprawdzenia.
+#
+# main.js w kilkunastu miejscach porównuje textContent elementów z dokładnymi
+# ciągami znaków — usuwa akapit "Kolejni Partnerzy Wspierający...", wstawia
+# odnośnik we frazie "rozwijamy Ogólnopolski Klaster...", podmienia nazwy
+# w timeline. textContent NIE zwija białych znaków, więc jeśli Prettier
+# przełamie wiersz w środku takiej frazy, porównanie przestaje pasować
+# i funkcja cicho nic nie robi. Żadnego błędu w konsoli — rzeczy po prostu
+# przestają się pojawiać.
+#
+# Przy domyślnej szerokości 80 psują się dokładnie dwie: akapit o Partnerach
+# Wspierających na klaster.html zostaje na stronie, choć ma być usunięty,
+# a na o-fundacji.html nie powstaje odnośnik do strony Klastra.
+#
+# Najdłuższy ciągły tekst w repozytorium ma 397 znaków, więc 500 daje zapas
+# na wcięcia i zostawia akapity w jednej linii. Podział na linie i wcięcia
+# nadal działają — Prettier zawsze łamie elementy blokowe.
+#
+# Po każdym formatowaniu sprawdź:
+#     node .tools/html-snapshot.js zapisz    (przed)
+#     node .tools/html-snapshot.js sprawdz   (po)
+printWidth: 500
+
+# Zawartość <style> i <script> zostaje nietknięta. Bloki CSS wewnątrz stron
+# są zminifikowane celowo i nie chcemy ich rozwijać przy formatowaniu HTML.
+embeddedLanguageFormatting: "off"
+
+# Domyślne, ale zapisane wprost, bo od tego zależy poprawność wyglądu:
+# Prettier nie wstawia białych znaków wokół elementów inline, więc nie
+# pojawiają się spacje tam, gdzie ich nie było.
+htmlWhitespaceSensitivity: "css"
