@@ -1,0 +1,43 @@
+name: Convert GPS logo
+
+on:
+  push:
+    paths:
+      - 'assets/img/Logo GPS.tiff'
+      - '.github/workflows/convert-gps-logo.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Convert TIFF to WebP
+        run: |
+          python -m pip install --quiet pillow
+          python - <<'PY'
+          from PIL import Image
+          src = 'assets/img/Logo GPS.tiff'
+          dst = 'assets/img/logo-gps.webp'
+          with Image.open(src) as im:
+              try:
+                  im.seek(0)
+              except EOFError:
+                  pass
+              if im.mode not in ('RGB', 'RGBA'):
+                  im = im.convert('RGBA' if 'A' in im.getbands() else 'RGB')
+              im.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
+              im.save(dst, 'WEBP', quality=88, method=6)
+          PY
+      - name: Commit optimized logo
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/img/logo-gps.webp
+          git diff --cached --quiet || git commit -m 'Optimize GPS logo for web'
+          git push
