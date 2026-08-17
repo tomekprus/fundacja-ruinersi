@@ -34,10 +34,13 @@ jobs:
               im.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
               im.save(dst, 'WEBP', quality=88, method=6)
           PY
-      - name: Commit optimized logo
+      - name: Point site to optimized logo
+        run: |
+          sed -i 's#assets/img/Logo GPS.tiff#assets/img/logo-gps.webp#g' assets/js/main.js
+      - name: Commit optimized logo and site update
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/img/logo-gps.webp
-          git diff --cached --quiet || git commit -m 'Optimize GPS logo for web'
+          git add assets/img/logo-gps.webp assets/js/main.js
+          git diff --cached --quiet || git commit -m 'Use optimized GPS logo on site'
           git push
