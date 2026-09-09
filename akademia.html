@@ -7,294 +7,33 @@
   <meta name="description" content="Akademia Ruinersów: bezpłatne warsztaty, spacery architektoniczne i praktyczna wiedza dla właścicieli starych domów, osób planujących zakup i wszystkich zainteresowanych tradycyjnym budownictwem." />
   <meta name="theme-color" content="#9A4B2C" />
   <link rel="canonical" href="https://ruinersi.org/akademia.html" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://ruinersi.org/akademia.html" />
-  <meta property="og:locale" content="pl_PL" />
-  <meta property="og:site_name" content="Fundacja Ruinersi na Dolnym Śląsku" />
-  <meta property="og:title" content="Akademia Ruinersów — naucz się rozumieć stary dom" />
-  <meta property="og:description" content="Bezpłatne warsztaty, spacery architektoniczne i praktyczna wiedza o tradycyjnych materiałach, konstrukcjach i odpowiedzialnej opiece nad starymi domami." />
-  <link rel="icon" href="assets/img/logo-ruinersi.jpg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Mulish:wght@300;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=20260813-4" />
-  <link rel="stylesheet" href="assets/css/accessibility.css?v=20260813-4" />
+  <meta property="og:type" content="website" /><meta property="og:url" content="https://ruinersi.org/akademia.html" /><meta property="og:locale" content="pl_PL" /><meta property="og:site_name" content="Fundacja Ruinersi na Dolnym Śląsku" /><meta property="og:title" content="Akademia Ruinersów — naucz się rozumieć stary dom" /><meta property="og:description" content="Bezpłatne warsztaty, spacery architektoniczne i praktyczna wiedza o tradycyjnych materiałach, konstrukcjach i odpowiedzialnej opiece nad starymi domami." />
+  <link rel="icon" href="assets/img/logo-ruinersi.jpg" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&family=Mulish:wght@300;500;700&display=swap" rel="stylesheet" /><link rel="stylesheet" href="assets/css/style.css?v=20260813-4" /><link rel="stylesheet" href="assets/css/accessibility.css?v=20260813-4" />
   <style>
-    .academy-hero{padding-block:clamp(3.5rem,7vw,6.5rem);background:var(--plaster-edge);border-bottom:1px solid var(--rule)}
-    .academy-hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(18rem,.55fr);gap:clamp(2.5rem,7vw,7rem);align-items:end}
-    .academy-hero .h1{margin-top:1rem;max-width:15ch}
-    .academy-hero .lead{margin-top:1.4rem;max-width:60ch;color:var(--graphite)}
-    .academy-meta{display:flex;flex-wrap:wrap;gap:.6rem .8rem;margin-top:1.6rem}
-    .academy-chip{display:inline-flex;align-items:center;min-height:2.35rem;padding:.45rem .75rem;border:1px solid var(--rule-firm);font-size:var(--fs-small);font-weight:500;background:var(--plaster)}
-    .academy-hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}
-    .academy-quote{border-top:3px solid var(--brick);padding-top:1.25rem;font-family:var(--font-display);font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.25}
-    .academy-quote small{display:block;margin-top:1rem;font-family:var(--font-body);font-size:var(--fs-small);font-weight:300;line-height:1.6;color:var(--graphite-soft)}
-    .academy-nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--plaster) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-    .academy-nav-inner{display:flex;gap:1.4rem;overflow:auto;padding-block:.85rem;scrollbar-width:none}
-    .academy-nav-inner::-webkit-scrollbar{display:none}
-    .academy-nav a{flex:0 0 auto;text-decoration:none;font-size:.86rem;font-weight:700}
-    .academy-nav a:hover{color:var(--brick)}
-    .for-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .for-card{background:var(--plaster);padding:clamp(1.4rem,3vw,2.25rem)}
-    .for-card .h3{margin-bottom:.7rem}
-    .for-card p{color:var(--graphite-soft)}
-    .principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}
-    .principle{border-top:2px solid var(--graphite);padding-top:1.15rem}
-    .principle .h3{margin-bottom:.75rem}
-    .principle p{color:var(--graphite-soft)}
-    .path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .path-card{display:flex;flex-direction:column;background:var(--plaster);padding:clamp(1.5rem,3vw,2.5rem);min-height:100%}
-    .path-kicker{font-size:1.75rem;line-height:1;margin-bottom:1.25rem}
-    .path-card .h3{margin-bottom:.8rem}
-    .path-card p{color:var(--graphite-soft)}
-    .path-card ul{margin:.5rem 0 1.4rem;padding-left:1.2rem;color:var(--graphite-soft)}
-    .path-card .btn{margin-top:auto;align-self:flex-start}
-    .workshop-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(17rem,.38fr);gap:var(--gap);align-items:end;margin-bottom:2rem}
-    .workshop-location{border-left:2px solid var(--brick);padding-left:1rem;color:var(--graphite-soft)}
-    .workshop-location strong{display:block;color:var(--graphite);font-family:var(--font-display);margin-bottom:.25rem}
-    .workshop-card{border:1px solid var(--rule-firm);background:var(--plaster);padding:clamp(1.6rem,4vw,3.2rem)}
-    .workshop-card-head{padding-bottom:1.5rem;border-bottom:1px solid var(--rule)}
-    .workshop-number{display:block;color:var(--brick);font-size:var(--fs-micro);font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.7rem}
-    .workshop-card-head .h3{font-size:clamp(1.55rem,2.2vw,2.3rem);max-width:24ch}
-    .workshop-summary{margin-top:1rem;font-size:clamp(1.04rem,1.2vw,1.18rem);line-height:1.55;max-width:70ch}
-    .workshop-summary strong{font-weight:700}
-    .workshop-body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(17rem,.7fr);gap:clamp(2rem,5vw,4rem);padding-top:1.7rem}
-    .workshop-body h4{font-family:var(--font-body);font-size:var(--fs-micro);letter-spacing:.15em;text-transform:uppercase;margin:0 0 .8rem;color:var(--graphite-faint)}
-    .workshop-topics{margin:0;padding:0;list-style:none}
-    .workshop-topics li{padding:.65rem 0;border-bottom:1px solid var(--rule);font-weight:500}
-    .workshop-topics li:first-child{padding-top:0}
-    .workshop-people{border-top:2px solid var(--graphite);padding-top:1rem}
-    .workshop-person{padding:.8rem 0;border-bottom:1px solid var(--rule)}
-    .workshop-person strong{display:block;font-family:var(--font-display);font-size:1.08rem}
-    .workshop-person span{display:block;margin-top:.15rem;color:var(--graphite-soft);font-size:var(--fs-small)}
-    .workshop-field{margin-top:1.2rem;padding:1rem 1.1rem;background:var(--plaster-edge);border-left:3px solid var(--brick)}
-    .workshop-field strong{display:block;font-family:var(--font-display);margin-bottom:.3rem}
-    .workshop-card-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid var(--rule)}
-    .workshop-card-foot p{margin:0;color:var(--graphite-soft);font-size:var(--fs-small)}
-    .next-workshops{margin-top:2.5rem}
-    .next-workshops .h3{margin-bottom:1rem}
-    .schedule-list{border-top:1px solid var(--graphite)}
-    .schedule-item{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:1.5rem;padding:1rem 0;border-bottom:1px solid var(--rule)}
-    .schedule-item strong{font-family:var(--font-display);font-size:1.05rem}
-    .schedule-item span{color:var(--graphite-soft)}
-    .walk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .walk-card{background:var(--plaster);padding:clamp(1.5rem,3vw,2.5rem)}
-    .walk-card .h3{margin-bottom:.8rem}
-    .walk-card p{color:var(--graphite-soft)}
-    .info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .info-card{background:var(--plaster);padding:clamp(1.4rem,3vw,2rem)}
-    .info-card strong{display:block;font-family:var(--font-display);font-size:1.05rem;margin-bottom:.35rem}
-    .info-card p{color:var(--graphite-soft)}
-    .signup-band{background:var(--forest);color:var(--plaster)}
-    .signup-band .eyebrow{color:#d8aa8f}
-    .signup-band .lead{color:#e5ded3}
-    .signup-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(18rem,.95fr);gap:var(--gap);align-items:start}
-    .signup-actions{display:grid;gap:.8rem}
-    .signup-action{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.15rem;border:1px solid rgba(255,255,255,.28);text-decoration:none;font-weight:700}
-    .signup-action:hover{background:rgba(255,255,255,.08)}
-    .signup-action span:last-child{font-size:1.25rem}
-    .materials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
-    .material-card{background:var(--plaster);padding:1.3rem 1.5rem}
-    .material-card strong{display:block;font-family:var(--font-display)}
-    .material-card span{display:block;margin-top:.35rem;color:var(--graphite-faint);font-size:var(--fs-small)}
-    .faq{max-width:920px}
-    .faq details{border-top:1px solid var(--rule);padding:1.1rem 0}
-    .faq details:last-child{border-bottom:1px solid var(--rule)}
-    .faq summary{cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:1.08rem}
-    .faq details p{margin-top:.8rem;color:var(--graphite-soft);max-width:68ch}
-    .program-box{border-left:3px solid var(--brick);padding-left:clamp(1.2rem,3vw,2rem);max-width:75ch}
-    .program-box .h3{margin-bottom:.8rem}
-    .program-box p{color:var(--graphite-soft)}
-    @media(max-width:900px){.academy-hero-grid,.signup-grid,.workshop-intro,.workshop-body{grid-template-columns:1fr}.for-grid,.principles,.path-grid{grid-template-columns:1fr}.walk-grid,.info-grid,.materials-grid{grid-template-columns:1fr 1fr}.academy-quote{max-width:34ch}.workshop-location{border-left:0;border-top:2px solid var(--brick);padding:1rem 0 0}}
-    @media(max-width:640px){.walk-grid,.info-grid,.materials-grid{grid-template-columns:1fr}.schedule-item{grid-template-columns:1fr;gap:.25rem}.academy-nav{top:0}.academy-hero-actions .btn{width:100%;text-align:center}.workshop-card-foot .btn{width:100%;text-align:center}}
-  </style>
-  <script>document.documentElement.className+=" js";</script>
+    .academy-hero{padding-block:clamp(3.5rem,7vw,6.5rem);background:var(--plaster-edge);border-bottom:1px solid var(--rule)}.academy-hero-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(18rem,.55fr);gap:clamp(2.5rem,7vw,7rem);align-items:end}.academy-hero .h1{margin-top:1rem;max-width:15ch}.academy-hero .lead{margin-top:1.4rem;max-width:60ch;color:var(--graphite)}.academy-meta{display:flex;flex-wrap:wrap;gap:.6rem .8rem;margin-top:1.6rem}.academy-chip{display:inline-flex;align-items:center;min-height:2.35rem;padding:.45rem .75rem;border:1px solid var(--rule-firm);font-size:var(--fs-small);font-weight:500;background:var(--plaster)}.academy-hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.8rem}.academy-quote{border-top:3px solid var(--brick);padding-top:1.25rem;font-family:var(--font-display);font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.25}.academy-quote small{display:block;margin-top:1rem;font-family:var(--font-body);font-size:var(--fs-small);font-weight:300;line-height:1.6;color:var(--graphite-soft)}
+    .academy-nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--plaster) 94%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}.academy-nav-inner{display:flex;gap:1.4rem;overflow:auto;padding-block:.85rem;scrollbar-width:none}.academy-nav-inner::-webkit-scrollbar{display:none}.academy-nav a{flex:0 0 auto;text-decoration:none;font-size:.86rem;font-weight:700}.academy-nav a:hover{color:var(--brick)}
+    .for-grid,.path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}.for-card,.path-card{background:var(--plaster);padding:clamp(1.4rem,3vw,2.25rem)}.for-card .h3,.path-card .h3{margin-bottom:.7rem}.for-card p,.path-card p{color:var(--graphite-soft)}.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem)}.principle{border-top:2px solid var(--graphite);padding-top:1.15rem}.principle .h3{margin-bottom:.75rem}.principle p{color:var(--graphite-soft)}.path-card{display:flex;flex-direction:column;min-height:100%}.path-kicker{font-size:1.75rem;line-height:1;margin-bottom:1.25rem}.path-card ul{margin:.5rem 0 1.4rem;padding-left:1.2rem;color:var(--graphite-soft)}.path-card .btn{margin-top:auto;align-self:flex-start}
+    .workshop-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(17rem,.38fr);gap:var(--gap);align-items:end;margin-bottom:2rem}.workshop-location{border-left:2px solid var(--brick);padding-left:1rem;color:var(--graphite-soft)}.workshop-location strong{display:block;color:var(--graphite);font-family:var(--font-display);margin-bottom:.25rem}.workshop-card{border:1px solid var(--rule-firm);background:var(--plaster);padding:clamp(1.6rem,4vw,3.2rem)}.workshop-card-head{padding-bottom:1.5rem;border-bottom:1px solid var(--rule)}.workshop-number{display:block;color:var(--brick);font-size:var(--fs-micro);font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.7rem}.workshop-card-head .h3{font-size:clamp(1.55rem,2.2vw,2.3rem);max-width:24ch}.workshop-summary{margin-top:1rem;font-size:clamp(1.04rem,1.2vw,1.18rem);line-height:1.55;max-width:70ch}.workshop-body{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(17rem,.7fr);gap:clamp(2rem,5vw,4rem);padding-top:1.7rem}.workshop-body h4{font-family:var(--font-body);font-size:var(--fs-micro);letter-spacing:.15em;text-transform:uppercase;margin:0 0 .8rem;color:var(--graphite-faint)}.workshop-topics{margin:0;padding:0;list-style:none}.workshop-topics li{padding:.65rem 0;border-bottom:1px solid var(--rule);font-weight:500}.workshop-topics li:first-child{padding-top:0}.workshop-people{border-top:2px solid var(--graphite);padding-top:1rem}.workshop-person{padding:.8rem 0;border-bottom:1px solid var(--rule)}.workshop-person strong{display:block;font-family:var(--font-display);font-size:1.08rem}.workshop-person span{display:block;margin-top:.15rem;color:var(--graphite-soft);font-size:var(--fs-small)}.workshop-field{margin-top:1.2rem;padding:1rem 1.1rem;background:var(--plaster-edge);border-left:3px solid var(--brick)}.workshop-field strong{display:block;font-family:var(--font-display);margin-bottom:.3rem}.workshop-timeline{margin-top:1.8rem;padding-top:1.5rem;border-top:1px solid var(--rule)}.workshop-timeline h4{font-family:var(--font-body);font-size:var(--fs-micro);letter-spacing:.15em;text-transform:uppercase;margin:0 0 .8rem;color:var(--graphite-faint)}.timeline-row{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--rule)}.timeline-row time{font-weight:700}.workshop-card-foot{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid var(--rule)}.workshop-card-foot p{margin:0;color:var(--graphite-soft);font-size:var(--fs-small)}.next-workshops{margin-top:2.5rem}.next-workshops .h3{margin-bottom:1rem}.schedule-list{border-top:1px solid var(--graphite)}.schedule-item{display:grid;grid-template-columns:9rem minmax(0,1fr);gap:1.5rem;padding:1rem 0;border-bottom:1px solid var(--rule)}.schedule-item strong{font-family:var(--font-display);font-size:1.05rem}.schedule-item span{color:var(--graphite-soft)}
+    .walk-grid,.info-grid,.materials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}.walk-card,.info-card,.material-card{background:var(--plaster);padding:clamp(1.4rem,3vw,2.5rem)}.walk-card .h3{margin-bottom:.8rem}.walk-card p,.info-card p{color:var(--graphite-soft)}.info-card strong{display:block;font-family:var(--font-display);font-size:1.05rem;margin-bottom:.35rem}.signup-band{background:var(--forest);color:var(--plaster)}.signup-band .eyebrow{color:#d8aa8f}.signup-band .lead{color:#e5ded3}.signup-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(18rem,.95fr);gap:var(--gap);align-items:start}.signup-actions{display:grid;gap:.8rem}.signup-action{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.15rem;border:1px solid rgba(255,255,255,.28);text-decoration:none;font-weight:700}.signup-action:hover{background:rgba(255,255,255,.08)}.material-card strong{display:block;font-family:var(--font-display)}.material-card span{display:block;margin-top:.35rem;color:var(--graphite-faint);font-size:var(--fs-small)}.faq{max-width:920px}.faq details{border-top:1px solid var(--rule);padding:1.1rem 0}.faq details:last-child{border-bottom:1px solid var(--rule)}.faq summary{cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:1.08rem}.faq details p{margin-top:.8rem;color:var(--graphite-soft);max-width:68ch}.program-box{border-left:3px solid var(--brick);padding-left:clamp(1.2rem,3vw,2rem);max-width:75ch}.program-box p{color:var(--graphite-soft)}
+    @media(max-width:900px){.academy-hero-grid,.signup-grid,.workshop-intro,.workshop-body{grid-template-columns:1fr}.for-grid,.principles,.path-grid{grid-template-columns:1fr}.walk-grid,.info-grid,.materials-grid{grid-template-columns:1fr 1fr}.workshop-location{border-left:0;border-top:2px solid var(--brick);padding:1rem 0 0}}@media(max-width:640px){.walk-grid,.info-grid,.materials-grid{grid-template-columns:1fr}.schedule-item,.timeline-row{grid-template-columns:1fr;gap:.25rem}.academy-hero-actions .btn,.workshop-card-foot .btn{width:100%;text-align:center}}
+  </style><script>document.documentElement.className+=" js";</script>
 </head>
 <body>
-  <a class="skip" href="#main">Przejdź do treści</a>
-  <header class="site-head">
-    <div class="wrap head-inner">
-      <a class="brand" href="index.html"><img src="assets/img/logo-ruinersi.jpg" alt="" width="44" height="44" /><span class="brand-text"><b>Fundacja Ruinersi</b><small>na Dolnym Śląsku</small></span></a>
-      <div class="head-right">
-        <nav id="nav" class="nav" aria-label="Nawigacja główna"><ul><li><a href="index.html">Strona główna</a></li><li><a href="o-fundacji.html">O Fundacji</a></li><li><a href="klaster.html">Klaster</a></li><li><a href="projekty.html" aria-current="page">Projekty</a></li><li><a href="wiedza.html">Wiedza</a></li><li><a href="media.html">Media</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
-        <a class="btn btn--brick nav-cta" href="wesprzyj.html">Wesprzyj nas</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span></span><span class="sr">Menu</span></button>
-      </div>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="academy-hero">
-      <div class="wrap academy-hero-grid">
-        <div>
-          <span class="eyebrow">Akademia Ruinersów · 2026</span>
-          <h1 class="h1">Naucz się rozumieć stary dom.</h1>
-          <p class="lead">Bezpłatne warsztaty, spacery architektoniczne i praktyczna wiedza dla właścicieli starych domów, osób planujących zakup, studentów i wszystkich, którzy chcą odpowiedzialnie działać na rzecz historycznej architektury.</p>
-          <div class="academy-meta" aria-label="Najważniejsze informacje"><span class="academy-chip">6 warsztatów</span><span class="academy-chip">2 spacery terenowe</span><span class="academy-chip">udział bezpłatny</span><span class="academy-chip">Dolny Śląsk</span></div>
-          <div class="academy-hero-actions"><a class="btn btn--brick" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer">Zapisz się na warsztaty</a><a class="btn btn--ghost" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank" rel="noopener noreferrer">Zapisz się na spacery</a></div>
-        </div>
-        <div class="academy-quote">Nie musisz już wszystkiego wiedzieć.<small>Wystarczy, że chcesz uważniej patrzeć, lepiej rozumieć i odpowiedzialniej działać.</small></div>
-      </div>
-    </section>
-
-    <nav class="academy-nav" aria-label="Na tej stronie"><div class="wrap academy-nav-inner"><a href="#dla-kogo">Dla kogo</a><a href="#sciezki">Jak działa Akademia</a><a href="#warsztaty">Warsztaty</a><a href="#spacery">Spacery</a><a href="#zapisy">Zapisy</a><a href="#praktycznie">Informacje praktyczne</a><a href="#materialy">Materiały</a><a href="#faq">FAQ</a></div></nav>
-
-    <section class="section" id="dla-kogo">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">Dla kogo</span><h2 class="h2">Akademia jest dla Ciebie, jeśli…</h2><p class="lead">Nie wymagamy wcześniejszego doświadczenia. Liczą się ciekawość, gotowość do zdobywania wiedzy i chęć nauczenia się patrzenia na stare budynki z większą uwagą.</p></div>
-        <div class="for-grid">
-          <article class="for-card"><h3 class="h3">Masz stary dom</h3><p>Chcesz lepiej rozumieć jego konstrukcję, materiały i potrzeby, zanim podejmiesz kolejną decyzję remontową.</p></article>
-          <article class="for-card"><h3 class="h3">Myślisz o zakupie</h3><p>Chcesz wiedzieć, na co patrzeć i jakie pytania zadawać, zanim staniesz się opiekunem historycznego budynku.</p></article>
-          <article class="for-card"><h3 class="h3">Remontujesz</h3><p>Szukasz rozwiązań, które pozwolą zachować wartość, charakter i historyczną substancję domu.</p></article>
-          <article class="for-card"><h3 class="h3">Uczysz się</h3><p>Studiujesz architekturę, budownictwo, ochronę dziedzictwa, rewitalizację albo po prostu interesujesz się tradycyjnym budownictwem.</p></article>
-          <article class="for-card"><h3 class="h3">Szukasz ludzi</h3><p>Chcesz poznać właścicieli, rzemieślników i osoby mierzące się z podobnymi wyzwaniami.</p></article>
-          <article class="for-card"><h3 class="h3">Chcesz działać</h3><p>Myślisz o wolontariacie lub współpracy z Fundacją przy kolejnych projektach, wydarzeniach i działaniach edukacyjnych.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--sunk section--ruled">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">Po co Akademia</span><h2 class="h2">Stary dom najpierw trzeba zrozumieć.</h2><p class="lead">Historyczny budynek nie jest nowym domem z „gorszymi materiałami”. Drewno, glina, wapno, cegła i kamień tworzą system, który ma własną logikę. Niewłaściwy remont może wyrządzić więcej szkody niż brak remontu.</p></div>
-        <div class="principles">
-          <article class="principle"><h3 class="h3">Rozumieć materiał</h3><p>Uczymy się właściwości tradycyjnych materiałów i tego, dlaczego nie każda współczesna technologia jest bezpieczna dla starego budynku.</p></article>
-          <article class="principle"><h3 class="h3">Czytać budynek</h3><p>Konstrukcja, detal, ślady przebudów, spękania czy zawilgocenia są informacją. Zanim zaczniemy zmieniać dom, trzeba nauczyć się je zauważać.</p></article>
-          <article class="principle"><h3 class="h3">Patrzeć szerzej</h3><p>Stary dom jest częścią ulicy, wsi i krajobrazu. Uczymy się dostrzegać wartości oraz zagrożenia zanim coś ważnego zniknie bezpowrotnie.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--ruled" id="sciezki">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">Jak działa Akademia</span><h2 class="h2">Trzy sposoby, żeby wejść do środka.</h2></div>
-        <div class="path-grid">
-          <article class="path-card"><div class="path-kicker" aria-hidden="true">🔨</div><h3 class="h3">Warsztaty praktyczne</h3><p>Praktyczne spotkania poświęcone problemom, z którymi właściciele starych domów spotykają się na co dzień.</p><ul><li>wapno i tradycyjne zaprawy</li><li>glina i naturalne wykończenia</li><li>drewno i konstrukcje ciesielskie</li><li>stan techniczny budynku</li><li>łączenie dawnych materiałów z nowymi technologiami</li></ul><a class="btn" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer">Zapisz się na warsztaty</a></article>
-          <article class="path-card"><div class="path-kicker" aria-hidden="true">🚶</div><h3 class="h3">Spacery architektoniczne</h3><p>Nie zwykłe zwiedzanie, lecz nauka „czytania” budynków, miejscowości i krajobrazu: materiałów, konstrukcji, detali, przekształceń i problemów technicznych.</p><p>Patrzymy też na to, jak pojedyncze decyzje remontowe wpływają na charakter całego otoczenia.</p><a class="btn" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank" rel="noopener noreferrer">Zapisz się na spacery</a></article>
-          <article class="path-card"><div class="path-kicker" aria-hidden="true">🌱</div><h3 class="h3">Działaj z Ruinersami</h3><p>Nie szukamy wyłącznie uczestników kolejnych wydarzeń. Chcemy poznać osoby, które mogą zostać z nami na dłużej i współtworzyć działania Fundacji.</p><p>Możesz pomóc organizacyjnie, merytorycznie, przy dokumentacji, komunikacji, grafice albo w działaniach terenowych.</p><a class="btn" href="https://forms.gle/56y9oKEhFEDSs1Bk9" target="_blank" rel="noopener noreferrer">Chcę działać z Ruinersami</a></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--sunk section--ruled" id="warsztaty">
-      <div class="wrap">
-        <div class="workshop-intro">
-          <div><span class="eyebrow">6 warsztatów</span><h2 class="h2 mt-1">Najpierw praktyka.</h2><p class="lead mt-1">Każdy dzień skupia się na konkretnym problemie starego domu. Pokazujemy <strong>co zrobić, czego nie robić i na co patrzeć</strong>, a zajęcia prowadzą ludzie pracujący z historycznymi budynkami w praktyce.</p></div>
-          <div class="workshop-location"><strong>Stałe miejsce warsztatów</strong>Fundacja Ruinersi na Dolnym Śląsku<br />Radogoszcz 67A, 59-800 Lubań</div>
-        </div>
-
-        <article class="workshop-card">
-          <div class="workshop-card-head">
-            <span class="workshop-number">Warsztat 1</span>
-            <h3 class="h3">Pierwsze działania w starym domu</h3>
-            <p class="workshop-summary"><strong>Bezpieczne uporządkowanie · wtórne okładziny · odkrywki · woda i wilgoć · zapach · widoczne oznaki biologicznego uszkodzenia drewna</strong></p>
-            <p>Spotkanie o tym, co robić na początku — zanim zacznie się właściwy remont i zanim podejmiemy decyzje, których później trudno będzie cofnąć.</p>
-          </div>
-          <div class="workshop-body">
-            <div>
-              <h4>Co będziemy robić</h4>
-              <ul class="workshop-topics">
-                <li><strong>Bezpiecznie porządkować</strong> stary budynek i przygotowywać go do dalszych oględzin.</li>
-                <li><strong>Rozpoznawać wtórne okładziny</strong> i elementy, które mogą zasłaniać starszą substancję.</li>
-                <li><strong>Wykonywać i interpretować odkrywki</strong> bez pochopnego niszczenia historycznych warstw.</li>
-                <li><strong>Szukać śladów wody i wilgoci</strong> oraz zwracać uwagę na zapach jako ważny sygnał diagnostyczny.</li>
-                <li><strong>Rozpoznawać widoczne oznaki biologicznego uszkodzenia drewna</strong> i wiedzieć, kiedy potrzebna jest dalsza diagnoza.</li>
-              </ul>
-            </div>
-            <aside>
-              <h4>Prowadzący</h4>
-              <div class="workshop-people">
-                <div class="workshop-person"><strong>Krzysztof Ałykow</strong><span>prezentacja i część praktyczna</span></div>
-                <div class="workshop-person"><strong>Łukasz Bednarz</strong><span>prezentacja</span></div>
-              </div>
-              <div class="workshop-field"><strong>Oględziny obiektu w Szyszkowej</strong><span>Dariusz Borkowski + Krzysztof Ałykow</span></div>
-            </aside>
-          </div>
-          <div class="workshop-card-foot"><p>Termin i szczegółowa organizacja dnia zostaną podane uczestnikom po potwierdzeniu programu.</p><a class="btn btn--brick" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer">Zapisz się na warsztaty</a></div>
-        </article>
-
-        <div class="next-workshops">
-          <h3 class="h3">Kolejne warsztaty Akademii</h3>
-          <div class="schedule-list" aria-label="Kolejne tematy warsztatów">
-            <div class="schedule-item"><strong>Wapno</strong><span>tradycyjne zaprawy, tynki i właściwe zastosowanie w starym budynku</span></div>
-            <div class="schedule-item"><strong>Glina</strong><span>naturalne materiały, wykończenia i praca z historyczną substancją</span></div>
-            <div class="schedule-item"><strong>Drewno</strong><span>konstrukcje, połączenia ciesielskie, ocena i naprawa</span></div>
-            <div class="schedule-item"><strong>Stan domu</strong><span>rozpoznawanie problemów i moment, w którym potrzebny jest specjalista</span></div>
-            <div class="schedule-item"><strong>Remont</strong><span>najczęstsze błędy oraz rozsądne łączenie dawnych materiałów ze współczesnymi technologiami</span></div>
-          </div>
-          <p class="mt-1"><span class="meta">Szczegółowe programy i prowadzących będziemy uzupełniać wraz z potwierdzaniem kolejnych spotkań.</span></p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--ruled" id="spacery">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">2 działania terenowe</span><h2 class="h2">Czytamy architekturę w krajobrazie.</h2><p class="lead">Spacery prowadzone z Gildią Przewodników Sudeckich pokazują drewnianą architekturę w jej naturalnym kontekście: historii miejsca, krajobrazie, turystyce i codziennym użytkowaniu.</p></div>
-        <div class="walk-grid">
-          <article class="walk-card"><span class="meta">Karkonosze · ok. 5 godzin</span><h3 class="h3 mt-1">Wang → Samotnia → Strzecha Akademicka</h3><p>Od jednej z najbardziej rozpoznawalnych drewnianych świątyń w regionie po tradycję górskich schronisk. Przyjrzymy się konstrukcji, detalom, materiałom i temu, jak drewno sprawdzało się w wymagających warunkach górskich.</p></article>
-          <article class="walk-card"><span class="meta">Dolina Bobru · ok. 3 godzin</span><h3 class="h3 mt-1">Jelenia Góra → Siedlęcin → Perła Zachodu</h3><p>Trasa pokazująca drewnianą zabudowę w kontekście krajobrazu Doliny Bobru i opowieść o tym, jak drewno funkcjonowało w lokalnym budownictwie, turystyce, gospodarce i codziennym życiu.</p></article>
-        </div>
-        <p class="mt-2"><a class="btn btn--brick" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank" rel="noopener noreferrer">Zapisz się na spacery</a></p>
-      </div>
-    </section>
-
-    <section class="section signup-band section--ruled" id="zapisy">
-      <div class="wrap signup-grid">
-        <div><span class="eyebrow">Zapisy</span><h2 class="h2 mt-1">Wybierz, jak chcesz dołączyć.</h2><p class="lead mt-1">Możesz zapisać się na warsztaty, spacery albo oba rodzaje wydarzeń. Jeśli chcesz zaangażować się w działania Fundacji także w inny sposób, wypełnij dodatkowo formularz dla wolontariuszy.</p></div>
-        <div class="signup-actions"><a class="signup-action" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer"><span>🔨 Zapisy na warsztaty</span><span aria-hidden="true">→</span></a><a class="signup-action" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank" rel="noopener noreferrer"><span>🚶 Zapisy na spacery</span><span aria-hidden="true">→</span></a><a class="signup-action" href="https://forms.gle/56y9oKEhFEDSs1Bk9" target="_blank" rel="noopener noreferrer"><span>🌱 Chcę działać z Ruinersami</span><span aria-hidden="true">→</span></a></div>
-      </div>
-    </section>
-
-    <section class="section section--ruled" id="praktycznie">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">One-stop-shop</span><h2 class="h2">Co, gdzie i jak?</h2><p class="lead">Wszystkie najważniejsze informacje organizacyjne będą aktualizowane właśnie tutaj. Przed każdym wydarzeniem uczestnicy otrzymają także szczegóły dotyczące konkretnego spotkania.</p></div>
-        <div class="info-grid">
-          <div class="info-card"><strong>Ile kosztuje udział?</strong><p>Udział w działaniach Akademii Ruinersów jest bezpłatny.</p></div>
-          <div class="info-card"><strong>Gdzie odbywają się warsztaty?</strong><p>W siedzibie Fundacji Ruinersi na Dolnym Śląsku: Radogoszcz 67A, 59-800 Lubań.</p></div>
-          <div class="info-card"><strong>Czy muszę mieć stary dom?</strong><p>Nie. Zapraszamy także osoby planujące zakup, studentów i osoby zainteresowane tradycyjnym budownictwem oraz ochroną dziedzictwa.</p></div>
-          <div class="info-card"><strong>Czy potrzebuję doświadczenia?</strong><p>Nie. Akademia jest pomyślana tak, aby dać uczestnikom praktyczne podstawy i język potrzebny do świadomego podejmowania decyzji.</p></div>
-          <div class="info-card"><strong>Czy muszę uczestniczyć we wszystkim?</strong><p>Nie. Możesz wybrać warsztaty, spacery albo oba rodzaje wydarzeń.</p></div>
-          <div class="info-card"><strong>Jak poznam termin i szczegóły?</strong><p>Po zgłoszeniu będziemy kontaktować się z uczestnikami zgodnie z zasadami rekrutacji. Aktualności będą też publikowane na tej stronie i w kanałach Fundacji.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--sunk section--ruled" id="materialy">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">Wiedza na później</span><h2 class="h2">Materiały Akademii</h2><p class="lead">Wraz z realizacją Akademii będziemy publikować materiały, do których będzie można wrócić po warsztatach i spacerach.</p></div>
-        <div class="materials-grid"><div class="material-card"><strong>Podstawy opieki nad starym domem</strong><span>broszura PDF · w przygotowaniu</span></div><div class="material-card"><strong>Glina w starym domu</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Wapno w starym domu</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Drewno i połączenia ciesielskie</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Najczęstsze błędy remontowe</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Relacje, zdjęcia i filmy</strong><span>będą uzupełniane w trakcie projektu</span></div></div>
-      </div>
-    </section>
-
-    <section class="section section--ruled" id="faq">
-      <div class="wrap">
-        <div class="section-head"><span class="eyebrow">FAQ</span><h2 class="h2">Najczęstsze pytania</h2></div>
-        <div class="faq">
-          <details><summary>Czy mój dom musi być zabytkiem?</summary><p>Nie. Akademia dotyczy również historycznych budynków niewpisanych do rejestru lub ewidencji zabytków. Ważna jest ich wartość, materiał, konstrukcja i miejsce w lokalnym krajobrazie.</p></details>
-          <details><summary>Czy udział jest bezpłatny?</summary><p>Tak. Udział w warsztatach i działaniach terenowych Akademii Ruinersów jest bezpłatny.</p></details>
-          <details><summary>Czy muszę znać się na budownictwie?</summary><p>Nie. Nie wymagamy wcześniejszego doświadczenia. Zależy nam na ciekawości, uważności i gotowości do uczenia się.</p></details>
-          <details><summary>Czy mogę zapisać się tylko na spacer albo tylko na warsztaty?</summary><p>Tak. Formularze są osobne, więc możesz wybrać interesującą Cię ścieżkę albo zapisać się na oba rodzaje wydarzeń.</p></details>
-          <details><summary>Czy Akademia jest także dla studentów?</summary><p>Tak. Zapraszamy osoby studiujące kierunki związane z architekturą, budownictwem, ochroną dziedzictwa i rewitalizacją, a także wszystkich zainteresowanych tematyką starych budynków.</p></details>
-          <details><summary>Chcę pomagać Fundacji. Czy Akademia jest dobrym początkiem?</summary><p>Tak. Wypełnij formularz „Chcę działać z Ruinersami”. Szukamy osób, które chcą wspierać przyszłe projekty jako wolontariusze albo dzielić się konkretnymi umiejętnościami.</p></details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--sunk section--ruled">
-      <div class="wrap"><div class="program-box"><span class="eyebrow">Projekt</span><h2 class="h3 mt-1">Akademia Ruinersów — warsztaty społecznej opieki nad starymi domami i tradycyjnymi technikami budowlanymi</h2><p>Zadanie realizowane przez Fundację Ruinersi na Dolnym Śląsku w ramach programu Narodowego Instytutu Dziedzictwa <strong>„Wspólnie dla dziedzictwa 2026”</strong>.</p><p>Partnerzy i prowadzący poszczególne działania będą prezentowani wraz z publikacją szczegółowych programów wydarzeń.</p></div></div>
-    </section>
-  </main>
-
-  <footer class="site-foot">
-    <div class="wrap">
-      <div class="foot-grid">
-        <div><p class="foot-brand-name">Fundacja Ruinersi<br />na Dolnym Śląsku</p><p class="foot-blurb">Ratujemy stare domy. Chronimy wiedzę. Łączymy ludzi.</p></div>
-        <nav aria-labelledby="foot-fundacja"><h2 id="foot-fundacja">Fundacja</h2><ul><li><a href="o-fundacji.html">O Fundacji</a></li><li><a href="media.html">Media</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav>
-        <nav aria-labelledby="foot-dzialamy"><h2 id="foot-dzialamy">Działamy</h2><ul><li><a href="klaster.html">Klaster</a></li><li><a href="projekty.html">Projekty</a></li><li><a href="wiedza.html">Wiedza</a></li><li><a href="wesprzyj.html">Wesprzyj nas</a></li></ul></nav>
-        <nav aria-labelledby="foot-obserwuj"><h2 id="foot-obserwuj">Obserwuj</h2><ul><li><a href="https://www.youtube.com/channel/UCkctrP_dngIs9oc1atbDjhQ" rel="noopener">YouTube</a></li><li><a href="https://open.spotify.com/show/57Cf4FxgErwgFRTLjNZqSl" rel="noopener">Spotify</a></li><li><a href="https://patronite.pl/Ruinersi" rel="noopener">Patronite</a></li><li><a href="https://buycoffee.to/ruinersi" rel="noopener">buycoffee.to</a></li></ul></nav>
-      </div>
-      <div class="foot-base"><p>© <span data-year>2026</span> Fundacja Ruinersi na Dolnym Śląsku · KRS 0001164062 · <a href="prywatnosc.html">Prywatność</a></p></div>
-    </div>
-  </footer>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/zgoda.js"></script>
-</body>
-</html>
+<a class="skip" href="#main">Przejdź do treści</a><header class="site-head"><div class="wrap head-inner"><a class="brand" href="index.html"><img src="assets/img/logo-ruinersi.jpg" alt="" width="44" height="44" /><span class="brand-text"><b>Fundacja Ruinersi</b><small>na Dolnym Śląsku</small></span></a><div class="head-right"><nav id="nav" class="nav" aria-label="Nawigacja główna"><ul><li><a href="index.html">Strona główna</a></li><li><a href="o-fundacji.html">O Fundacji</a></li><li><a href="klaster.html">Klaster</a></li><li><a href="projekty.html" aria-current="page">Projekty</a></li><li><a href="wiedza.html">Wiedza</a></li><li><a href="media.html">Media</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav><a class="btn btn--brick nav-cta" href="wesprzyj.html">Wesprzyj nas</a><button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span></span><span class="sr">Menu</span></button></div></div></header>
+<main id="main">
+<section class="academy-hero"><div class="wrap academy-hero-grid"><div><span class="eyebrow">Akademia Ruinersów · 2026</span><h1 class="h1">Naucz się rozumieć stary dom.</h1><p class="lead">Bezpłatne warsztaty, spacery architektoniczne i praktyczna wiedza dla właścicieli starych domów, osób planujących zakup, studentów i wszystkich, którzy chcą odpowiedzialnie działać na rzecz historycznej architektury.</p><div class="academy-meta"><span class="academy-chip">6 warsztatów</span><span class="academy-chip">2 spacery terenowe</span><span class="academy-chip">udział bezpłatny</span><span class="academy-chip">Dolny Śląsk</span></div><div class="academy-hero-actions"><a class="btn btn--brick" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer">Zapisz się na warsztaty</a><a class="btn btn--ghost" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank" rel="noopener noreferrer">Zapisz się na spacery</a></div></div><div class="academy-quote">Nie musisz już wszystkiego wiedzieć.<small>Wystarczy, że chcesz uważniej patrzeć, lepiej rozumieć i odpowiedzialniej działać.</small></div></div></section>
+<nav class="academy-nav"><div class="wrap academy-nav-inner"><a href="#dla-kogo">Dla kogo</a><a href="#sciezki">Jak działa Akademia</a><a href="#warsztaty">Warsztaty</a><a href="#spacery">Spacery</a><a href="#zapisy">Zapisy</a><a href="#praktycznie">Informacje praktyczne</a><a href="#materialy">Materiały</a><a href="#faq">FAQ</a></div></nav>
+<section class="section" id="dla-kogo"><div class="wrap"><div class="section-head"><span class="eyebrow">Dla kogo</span><h2 class="h2">Akademia jest dla Ciebie, jeśli…</h2><p class="lead">Nie wymagamy wcześniejszego doświadczenia. Liczą się ciekawość, gotowość do zdobywania wiedzy i chęć nauczenia się patrzenia na stare budynki z większą uwagą.</p></div><div class="for-grid"><article class="for-card"><h3 class="h3">Masz stary dom</h3><p>Chcesz lepiej rozumieć jego konstrukcję, materiały i potrzeby, zanim podejmiesz kolejną decyzję remontową.</p></article><article class="for-card"><h3 class="h3">Myślisz o zakupie</h3><p>Chcesz wiedzieć, na co patrzeć i jakie pytania zadawać, zanim staniesz się opiekunem historycznego budynku.</p></article><article class="for-card"><h3 class="h3">Remontujesz</h3><p>Szukasz rozwiązań, które pozwolą zachować wartość, charakter i historyczną substancję domu.</p></article><article class="for-card"><h3 class="h3">Uczysz się</h3><p>Studiujesz architekturę, budownictwo, ochronę dziedzictwa, rewitalizację albo po prostu interesujesz się tradycyjnym budownictwem.</p></article><article class="for-card"><h3 class="h3">Szukasz ludzi</h3><p>Chcesz poznać właścicieli, rzemieślników i osoby mierzące się z podobnymi wyzwaniami.</p></article><article class="for-card"><h3 class="h3">Chcesz działać</h3><p>Myślisz o wolontariacie lub współpracy z Fundacją przy kolejnych projektach, wydarzeniach i działaniach edukacyjnych.</p></article></div></div></section>
+<section class="section section--sunk section--ruled"><div class="wrap"><div class="section-head"><span class="eyebrow">Po co Akademia</span><h2 class="h2">Stary dom najpierw trzeba zrozumieć.</h2><p class="lead">Historyczny budynek nie jest nowym domem z „gorszymi materiałami”. Drewno, glina, wapno, cegła i kamień tworzą system, który ma własną logikę. Niewłaściwy remont może wyrządzić więcej szkody niż brak remontu.</p></div><div class="principles"><article class="principle"><h3 class="h3">Rozumieć materiał</h3><p>Uczymy się właściwości tradycyjnych materiałów i tego, dlaczego nie każda współczesna technologia jest bezpieczna dla starego budynku.</p></article><article class="principle"><h3 class="h3">Czytać budynek</h3><p>Konstrukcja, detal, ślady przebudów, spękania czy zawilgocenia są informacją. Zanim zaczniemy zmieniać dom, trzeba nauczyć się je zauważać.</p></article><article class="principle"><h3 class="h3">Patrzeć szerzej</h3><p>Stary dom jest częścią ulicy, wsi i krajobrazu. Uczymy się dostrzegać wartości oraz zagrożenia zanim coś ważnego zniknie bezpowrotnie.</p></article></div></div></section>
+<section class="section section--ruled" id="sciezki"><div class="wrap"><div class="section-head"><span class="eyebrow">Jak działa Akademia</span><h2 class="h2">Trzy sposoby, żeby wejść do środka.</h2></div><div class="path-grid"><article class="path-card"><div class="path-kicker">🔨</div><h3 class="h3">Warsztaty praktyczne</h3><p>Praktyczne spotkania poświęcone problemom, z którymi właściciele starych domów spotykają się na co dzień.</p><ul><li>wapno i tradycyjne zaprawy</li><li>glina i naturalne wykończenia</li><li>drewno i konstrukcje ciesielskie</li><li>stan techniczny budynku</li><li>łączenie dawnych materiałów z nowymi technologiami</li></ul><a class="btn" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank">Zapisz się na warsztaty</a></article><article class="path-card"><div class="path-kicker">🚶</div><h3 class="h3">Spacery architektoniczne</h3><p>Nie zwykłe zwiedzanie, lecz nauka „czytania” budynków, miejscowości i krajobrazu: materiałów, konstrukcji, detali, przekształceń i problemów technicznych.</p><p>Patrzymy też na to, jak pojedyncze decyzje remontowe wpływają na charakter całego otoczenia.</p><a class="btn" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank">Zapisz się na spacery</a></article><article class="path-card"><div class="path-kicker">🌱</div><h3 class="h3">Działaj z Ruinersami</h3><p>Nie szukamy wyłącznie uczestników kolejnych wydarzeń. Chcemy poznać osoby, które mogą zostać z nami na dłużej i współtworzyć działania Fundacji.</p><p>Możesz pomóc organizacyjnie, merytorycznie, przy dokumentacji, komunikacji, grafice albo w działaniach terenowych.</p><a class="btn" href="https://forms.gle/56y9oKEhFEDSs1Bk9" target="_blank">Chcę działać z Ruinersami</a></article></div></div></section>
+<section class="section section--sunk section--ruled" id="warsztaty"><div class="wrap"><div class="workshop-intro"><div><span class="eyebrow">6 warsztatów</span><h2 class="h2 mt-1">Najpierw praktyka.</h2><p class="lead mt-1">Każdy dzień skupia się na konkretnym problemie starego domu. Pokazujemy <strong>co zrobić, czego nie robić i na co patrzeć</strong>, a zajęcia prowadzą ludzie pracujący z historycznymi budynkami w praktyce.</p></div><div class="workshop-location"><strong>Stałe miejsce warsztatów</strong>Fundacja Ruinersi na Dolnym Śląsku<br />Radogoszcz 67A, 59-800 Lubań</div></div>
+<article class="workshop-card"><div class="workshop-card-head"><span class="workshop-number">Warsztat 1 · 26 września 2026 · 10:00–16:00</span><h3 class="h3">Pierwsze działania w starym domu</h3><p class="workshop-summary"><strong>Od wejścia w stan posiadania do pierwszej oceny budynku: bezpieczne uporządkowanie, formalności, odkrywki oraz rozpoznawanie wody, wilgoci i widocznych oznak biologicznego uszkodzenia drewna.</strong></p></div><div class="workshop-body"><div><h4>Prezentacja 1 · Odpowiedzialny remont</h4><ul class="workshop-topics"><li><strong>Od wejścia w stan posiadania do remontu</strong> — jak zacząć i w jakiej kolejności działać.</li><li><strong>Porządkowanie terenu i obiektu</strong> — co można zrobić bezpiecznie na początku.</li><li><strong>MPZP i formalności</strong> — co sprawdzić przed rozpoczęciem prac.</li><li><strong>Status ochrony i rola konserwatora</strong> — kiedy i z kim trzeba uzgadniać działania.</li></ul><h4 style="margin-top:1.6rem">Prezentacja 2</h4><p><strong>„Ocena stanu technicznego jako punkt wyjścia do renowacji”</strong></p><ul class="workshop-topics"><li>pierwsze rozpoznawanie <strong>wody i wilgoci</strong>,</li><li>znaczenie <strong>zapachu</strong> podczas oględzin starego budynku,</li><li><strong>widoczne oznaki biologicznego uszkodzenia drewna</strong>,</li><li>ocena stanu technicznego jako podstawa do planowania dalszych działań.</li></ul></div><aside><h4>Prowadzący</h4><div class="workshop-people"><div class="workshop-person"><strong>Łukasz Bednarz</strong><span>prezentacja 1: odpowiedzialny remont</span></div><div class="workshop-person"><strong>Krzysztof Ałykow</strong><span>prezentacja 2: „Ocena stanu technicznego jako punkt wyjścia do renowacji”</span></div></div><div class="workshop-field"><strong>Oględziny budynku w Szyszkowej</strong><span>Dariusz Borkowski + Krzysztof Ałykow</span></div></aside></div><div class="workshop-timeline"><h4>Program dnia · 26 września</h4><div class="timeline-row"><time>10:00–10:15</time><span>Rejestracja uczestników + szkolenie BHP</span></div><div class="timeline-row"><time>10:15–11:45</time><span><strong>Prezentacja 1:</strong> odpowiedzialny remont — Łukasz Bednarz</span></div><div class="timeline-row"><time>11:45–13:15</time><span><strong>Prezentacja 2:</strong> „Ocena stanu technicznego jako punkt wyjścia do renowacji” — Krzysztof Ałykow</span></div><div class="timeline-row"><time>13:15–13:45</time><span>Przerwa obiadowa</span></div><div class="timeline-row"><time>13:45–14:00</time><span>Przejazd samochodami do Szyszkowej</span></div><div class="timeline-row"><time>14:00–16:00</time><span><strong>Oględziny budynku w Szyszkowej</strong> — Dariusz Borkowski + Krzysztof Ałykow</span></div></div><div class="workshop-card-foot"><p><strong>26.09.2026 · 10:00–16:00</strong> · start: Radogoszcz 67A · część terenowa: Szyszkowa</p><a class="btn btn--brick" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank" rel="noopener noreferrer">Zapisz się na warsztaty</a></div></article>
+<div class="next-workshops"><h3 class="h3">Kolejne warsztaty Akademii</h3><div class="schedule-list"><div class="schedule-item"><strong>Wapno</strong><span>tradycyjne zaprawy, tynki i właściwe zastosowanie w starym budynku</span></div><div class="schedule-item"><strong>Glina</strong><span>naturalne materiały, wykończenia i praca z historyczną substancją</span></div><div class="schedule-item"><strong>Drewno</strong><span>konstrukcje, połączenia ciesielskie, ocena i naprawa</span></div><div class="schedule-item"><strong>Stan domu</strong><span>rozpoznawanie problemów i moment, w którym potrzebny jest specjalista</span></div><div class="schedule-item"><strong>Remont</strong><span>najczęstsze błędy oraz rozsądne łączenie dawnych materiałów ze współczesnymi technologiami</span></div></div><p class="mt-1"><span class="meta">Szczegółowe programy i prowadzących będziemy uzupełniać wraz z potwierdzaniem kolejnych spotkań.</span></p></div></div></section>
+<section class="section section--ruled" id="spacery"><div class="wrap"><div class="section-head"><span class="eyebrow">2 działania terenowe</span><h2 class="h2">Czytamy architekturę w krajobrazie.</h2><p class="lead">Spacery prowadzone z Gildią Przewodników Sudeckich pokazują drewnianą architekturę w jej naturalnym kontekście: historii miejsca, krajobrazie, turystyce i codziennym użytkowaniu.</p></div><div class="walk-grid"><article class="walk-card"><span class="meta">Karkonosze · ok. 5 godzin</span><h3 class="h3 mt-1">Wang → Samotnia → Strzecha Akademicka</h3><p>Od jednej z najbardziej rozpoznawalnych drewnianych świątyń w regionie po tradycję górskich schronisk. Przyjrzymy się konstrukcji, detalom, materiałom i temu, jak drewno sprawdzało się w wymagających warunkach górskich.</p></article><article class="walk-card"><span class="meta">Dolina Bobru · ok. 3 godzin</span><h3 class="h3 mt-1">Jelenia Góra → Siedlęcin → Perła Zachodu</h3><p>Trasa pokazująca drewnianą zabudowę w kontekście krajobrazu Doliny Bobru i opowieść o tym, jak drewno funkcjonowało w lokalnym budownictwie, turystyce, gospodarce i codziennym życiu.</p></article></div><p class="mt-2"><a class="btn btn--brick" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank">Zapisz się na spacery</a></p></div></section>
+<section class="section signup-band section--ruled" id="zapisy"><div class="wrap signup-grid"><div><span class="eyebrow">Zapisy</span><h2 class="h2 mt-1">Wybierz, jak chcesz dołączyć.</h2><p class="lead mt-1">Możesz zapisać się na warsztaty, spacery albo oba rodzaje wydarzeń. Jeśli chcesz zaangażować się w działania Fundacji także w inny sposób, wypełnij dodatkowo formularz dla wolontariuszy.</p></div><div class="signup-actions"><a class="signup-action" href="https://forms.gle/UViqu7duMbUvwN3u6" target="_blank"><span>🔨 Zapisy na warsztaty</span><span>→</span></a><a class="signup-action" href="https://forms.gle/31WdmVVqZG31Rj3HA" target="_blank"><span>🚶 Zapisy na spacery</span><span>→</span></a><a class="signup-action" href="https://forms.gle/56y9oKEhFEDSs1Bk9" target="_blank"><span>🌱 Chcę działać z Ruinersami</span><span>→</span></a></div></div></section>
+<section class="section section--ruled" id="praktycznie"><div class="wrap"><div class="section-head"><span class="eyebrow">One-stop-shop</span><h2 class="h2">Co, gdzie i jak?</h2><p class="lead">Wszystkie najważniejsze informacje organizacyjne będą aktualizowane właśnie tutaj. Przed każdym wydarzeniem uczestnicy otrzymają także szczegóły dotyczące konkretnego spotkania.</p></div><div class="info-grid"><div class="info-card"><strong>Ile kosztuje udział?</strong><p>Udział w działaniach Akademii Ruinersów jest bezpłatny.</p></div><div class="info-card"><strong>Gdzie odbywają się warsztaty?</strong><p>W siedzibie Fundacji Ruinersi na Dolnym Śląsku: Radogoszcz 67A, 59-800 Lubań.</p></div><div class="info-card"><strong>Czy muszę mieć stary dom?</strong><p>Nie. Zapraszamy także osoby planujące zakup, studentów i osoby zainteresowane tradycyjnym budownictwem oraz ochroną dziedzictwa.</p></div><div class="info-card"><strong>Czy potrzebuję doświadczenia?</strong><p>Nie. Akademia jest pomyślana tak, aby dać uczestnikom praktyczne podstawy i język potrzebny do świadomego podejmowania decyzji.</p></div><div class="info-card"><strong>Czy muszę uczestniczyć we wszystkim?</strong><p>Nie. Możesz wybrać warsztaty, spacery albo oba rodzaje wydarzeń.</p></div><div class="info-card"><strong>Jak poznam termin i szczegóły?</strong><p>Terminy i programy publikujemy na tej stronie. Po zgłoszeniu będziemy kontaktować się z uczestnikami zgodnie z zasadami rekrutacji.</p></div></div></div></section>
+<section class="section section--sunk section--ruled" id="materialy"><div class="wrap"><div class="section-head"><span class="eyebrow">Wiedza na później</span><h2 class="h2">Materiały Akademii</h2><p class="lead">Wraz z realizacją Akademii będziemy publikować materiały, do których będzie można wrócić po warsztatach i spacerach.</p></div><div class="materials-grid"><div class="material-card"><strong>Podstawy opieki nad starym domem</strong><span>broszura PDF · w przygotowaniu</span></div><div class="material-card"><strong>Glina w starym domu</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Wapno w starym domu</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Drewno i połączenia ciesielskie</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Najczęstsze błędy remontowe</strong><span>karta informacyjna PDF · w przygotowaniu</span></div><div class="material-card"><strong>Relacje, zdjęcia i filmy</strong><span>będą uzupełniane w trakcie projektu</span></div></div></div></section>
+<section class="section section--ruled" id="faq"><div class="wrap"><div class="section-head"><span class="eyebrow">FAQ</span><h2 class="h2">Najczęstsze pytania</h2></div><div class="faq"><details><summary>Czy mój dom musi być zabytkiem?</summary><p>Nie. Akademia dotyczy również historycznych budynków niewpisanych do rejestru lub ewidencji zabytków.</p></details><details><summary>Czy udział jest bezpłatny?</summary><p>Tak. Udział w warsztatach i działaniach terenowych Akademii Ruinersów jest bezpłatny.</p></details><details><summary>Czy muszę znać się na budownictwie?</summary><p>Nie. Nie wymagamy wcześniejszego doświadczenia.</p></details><details><summary>Czy mogę zapisać się tylko na spacer albo tylko na warsztaty?</summary><p>Tak. Formularze są osobne, więc możesz wybrać interesującą Cię ścieżkę albo oba rodzaje wydarzeń.</p></details><details><summary>Czy Akademia jest także dla studentów?</summary><p>Tak. Zapraszamy osoby studiujące kierunki związane z architekturą, budownictwem, ochroną dziedzictwa i rewitalizacją, a także wszystkich zainteresowanych tematyką starych budynków.</p></details><details><summary>Chcę pomagać Fundacji. Czy Akademia jest dobrym początkiem?</summary><p>Tak. Wypełnij formularz „Chcę działać z Ruinersami”.</p></details></div></div></section>
+<section class="section section--sunk section--ruled"><div class="wrap"><div class="program-box"><span class="eyebrow">Projekt</span><h2 class="h3 mt-1">Akademia Ruinersów — warsztaty społecznej opieki nad starymi domami i tradycyjnymi technikami budowlanymi</h2><p>Zadanie realizowane przez Fundację Ruinersi na Dolnym Śląsku w ramach programu Narodowego Instytutu Dziedzictwa <strong>„Wspólnie dla dziedzictwa 2026”</strong>.</p><p>Partnerzy i prowadzący poszczególne działania będą prezentowani wraz z publikacją szczegółowych programów wydarzeń.</p></div></div></section>
+</main>
+<footer class="site-foot"><div class="wrap"><div class="foot-grid"><div><p class="foot-brand-name">Fundacja Ruinersi<br />na Dolnym Śląsku</p><p class="foot-blurb">Ratujemy stare domy. Chronimy wiedzę. Łączymy ludzi.</p></div><nav><h2>Fundacja</h2><ul><li><a href="o-fundacji.html">O Fundacji</a></li><li><a href="media.html">Media</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav><nav><h2>Działamy</h2><ul><li><a href="klaster.html">Klaster</a></li><li><a href="projekty.html">Projekty</a></li><li><a href="wiedza.html">Wiedza</a></li><li><a href="wesprzyj.html">Wesprzyj nas</a></li></ul></nav><nav><h2>Obserwuj</h2><ul><li><a href="https://www.youtube.com/channel/UCkctrP_dngIs9oc1atbDjhQ">YouTube</a></li><li><a href="https://open.spotify.com/show/57Cf4FxgErwgFRTLjNZqSl">Spotify</a></li><li><a href="https://patronite.pl/Ruinersi">Patronite</a></li><li><a href="https://buycoffee.to/ruinersi">buycoffee.to</a></li></ul></nav></div><div class="foot-base"><p>© <span data-year>2026</span> Fundacja Ruinersi na Dolnym Śląsku · KRS 0001164062 · <a href="prywatnosc.html">Prywatność</a></p></div></div></footer><script src="assets/js/main.js"></script><script src="assets/js/zgoda.js"></script></body></html>
