@@ -1305,7 +1305,7 @@ figure {
 
 .row {
   display: grid;
-  grid-template-columns: 6rem minmax(0,1.5fr) minmax(0,1fr) auto;
+  grid-template-columns: 10rem minmax(0,1.5fr) minmax(0,1fr) auto;
   gap: clamp(1rem,2.5vw,2rem);
   align-items: baseline;
   padding-block: 1.15rem;
