@@ -15,8 +15,7 @@
       .project-cover{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;margin-bottom:0}
     </style>
     <script>document.documentElement.className+=" js";</script>
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://ruinersi.org/cz-review/projekty.html" />
+    <meta name="robots" content="noindex, nofollow" /><link rel="canonical" href="https://ruinersi.org/cz-review/projekty.html" />
   </head>
   <body>
     <a class="skip" href="#main">Przejdź do treści</a>
@@ -47,18 +46,5 @@
     </main>
     <footer class="site-foot"><div class="wrap"><div class="foot-grid"><div><p class="foot-brand-name">Fundacja Ruinersi<br />na Dolnym Śląsku</p><p class="foot-blurb">Ratujemy stare domy. Chronimy wiedzę. Łączymy ludzi.</p></div><nav aria-labelledby="foot-fundacja"><h2 id="foot-fundacja">Fundacja</h2><ul><li><a href="o-fundacji.html">O Fundacji</a></li><li><a href="media.html">Media</a></li><li><a href="kontakt.html">Kontakt</a></li></ul></nav><nav aria-labelledby="foot-dzialamy"><h2 id="foot-dzialamy">Działamy</h2><ul><li><a href="klaster.html">Klaster</a></li><li><a href="projekty.html">Projekty</a></li><li><a href="wiedza.html">Wiedza</a></li><li><a href="wesprzyj.html">Wesprzyj nas</a></li></ul></nav><nav aria-labelledby="foot-obserwuj"><h2 id="foot-obserwuj">Obserwuj</h2><ul><li><a href="https://www.youtube.com/channel/UCkctrP_dngIs9oc1atbDjhQ" rel="noopener">YouTube</a></li><li><a href="https://open.spotify.com/show/57Cf4FxgErwgFRTLjNZqSl" rel="noopener">Spotify</a></li><li><a href="https://patronite.pl/Ruinersi" rel="noopener">Patronite</a></li><li><a href="https://buycoffee.to/ruinersi" rel="noopener">buycoffee.to</a></li></ul></nav></div><div class="foot-base"><p>© <span data-year>2026</span> Fundacja Ruinersi na Dolnym Śląsku · KRS 0001164062 · <a href="prywatnosc.html">Prywatność</a></p></div></div></footer>
     <script src="../assets/js/main.js"></script><script src="../assets/js/zgoda.js"></script>
-  <script>
-(function(){
-  const target="cs";
-  const protectedNames=['Fundacja Ruinersi na Dolnym Śląsku','Ruinersi','Akademia Ruinersów','Ogólnopolski Klaster Społecznej Ochrony Dziedzictwa'];
-  const skip=new Set(['SCRIPT','STYLE','CODE','PRE','NOSCRIPT']);
-  const nodes=[]; const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  while(w.nextNode()){const n=w.currentNode,t=n.nodeValue.trim();if(t&&/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(t)&&!skip.has(n.parentElement?.tagName))nodes.push(n);}
-  const cache=new Map();
-  async function tr(t){if(cache.has(t))return cache.get(t);let masked=t,vals=[];protectedNames.forEach((x,i)=>{if(masked.includes(x)){vals[i]=x;masked=masked.split(x).join('ZXQ'+i+'QXZ')}});try{const u='https://translate.googleapis.com/translate_a/single?client=gtx&sl=pl&tl='+target+'&dt=t&q='+encodeURIComponent(masked);const r=await fetch(u);const j=await r.json();let out=(j[0]||[]).map(x=>x[0]||'').join('');vals.forEach((x,i)=>{if(x)out=out.split('ZXQ'+i+'QXZ').join(x)});cache.set(t,out);return out}catch(e){return t}}
-  async function run(){document.documentElement.lang="cs";for(let i=0;i<nodes.length;i+=12){await Promise.all(nodes.slice(i,i+12).map(async n=>{n.nodeValue=n.nodeValue.replace(n.nodeValue.trim(),await tr(n.nodeValue.trim()))}))}for(const sel of ['title','meta[name="description"]']){const el=document.querySelector(sel);if(!el)continue;if(el.tagName==='TITLE')el.textContent=await tr(el.textContent);else el.content=await tr(el.content)}}
-  run();
-})();
-</script>
-</body>
+  <script>(function(){const T='cs',S=new Set(['SCRIPT','STYLE','CODE','PRE','NOSCRIPT']),N=[],W=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(W.nextNode()){let n=W.currentNode,t=n.nodeValue.trim();if(t&&/[A-Za-zĄĆĘŁŃÓŚŹŻąćęłńóśźż]/.test(t)&&!S.has(n.parentElement?.tagName))N.push(n)}const C=new Map(),P=['Fundacja Ruinersi na Dolnym Śląsku','Ruinersi','Akademia Ruinersów'];async function x(t){if(C.has(t))return C.get(t);let m=t,v=[];P.forEach((q,i)=>{if(m.includes(q)){v[i]=q;m=m.split(q).join('ZXQ'+i+'QXZ')}});try{let r=await fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=pl&tl='+T+'&dt=t&q='+encodeURIComponent(m)),j=await r.json(),o=(j[0]||[]).map(a=>a[0]||'').join('');v.forEach((q,i)=>{if(q)o=o.split('ZXQ'+i+'QXZ').join(q)});C.set(t,o);return o}catch(e){return t}}(async()=>{for(let i=0;i<N.length;i+=10)await Promise.all(N.slice(i,i+10).map(async n=>n.nodeValue=n.nodeValue.replace(n.nodeValue.trim(),await x(n.nodeValue.trim()))));document.title=await x(document.title);let d=document.querySelector('meta[name="description"]');if(d)d.content=await x(d.content)})()})();</script></body>
 </html>
