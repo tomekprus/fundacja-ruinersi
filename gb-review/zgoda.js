@@ -1,0 +1,12 @@
+/* Fundacja Ruinersi na Dolnym Śląsku — analytics consent (GB). */
+(function(window,document){"use strict";
+var KEY="ruinersi-zgoda",VERSION=1,GA_ID="G-FVW52GBWYN",COOKIE_EXPIRES=34214400;
+var CONTENT='<div class="zgoda-inner"><div class="zgoda-text"><strong class="zgoda-title">We use cookies</strong><p>We use cookies to analyse traffic on the website. Clicking “I agree” means you consent to our use of analytics cookies.</p></div><div class="zgoda-akcje"><button type="button" class="zgoda-btn" data-zgoda="nie">Decline</button><button type="button" class="zgoda-btn" data-zgoda="tak">I agree</button><a class="zgoda-link" href="prywatnosc.html">Privacy Policy</a></div></div>';
+var bar=null;function read(){try{var raw=window.localStorage.getItem(KEY);if(!raw)return null;var d=JSON.parse(raw);if(!d||d.wersja!==VERSION||typeof d.analityka!=="boolean")return null;return d;}catch(e){return null;}}
+function save(a){var d={analityka:!!a,wersja:VERSION,data:new Date().toISOString()};try{window.localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}return d;}
+function gtag(){window.dataLayer.push(arguments);}function defaults(){window.dataLayer=window.dataLayer||[];gtag("consent","default",{analytics_storage:"denied",ad_storage:"denied",ad_user_data:"denied",ad_personalization:"denied",wait_for_update:500});}
+function enable(){if(document.getElementById("ga-script"))return;gtag("consent","update",{analytics_storage:"granted"});var s=document.createElement("script");s.id="ga-script";s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+GA_ID;document.head.appendChild(s);gtag("js",new Date());gtag("config",GA_ID,{cookie_expires:COOKIE_EXPIRES});}
+function hide(){if(bar&&bar.remove)bar.remove();bar=null;}function apply(a){save(a);if(a)enable();hide();}
+function build(){if(bar)return bar;var el=document.createElement("div");el.className="zgoda";el.setAttribute("role","region");el.setAttribute("aria-label","Consent to visitor statistics");el.innerHTML=CONTENT;el.addEventListener("click",function(e){var t=e.target;if(!t||!t.getAttribute)return;var c=t.getAttribute("data-zgoda");if(!c)return;apply(c==="tak");});document.body.insertBefore(el,document.body.firstChild);bar=el;return el;}
+function start(){defaults();var d=read();if(d&&d.analityka)enable();if(!d||window.location.hash==="#zgoda")build();}
+window.RuinersiZgoda={start:start,pokaz:build,zastosuj:apply,_wewn:{odczytaj:read,zapisz:save}};if(document.readyState!=="loading")start();else document.addEventListener("DOMContentLoaded",start);})(window,document);
