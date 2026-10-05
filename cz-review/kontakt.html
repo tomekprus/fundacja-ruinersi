@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Kontakt — Fundacja Ruinersi na Dolnym Śląsku</title>
-    <meta name="description" content="Kontakt Fundacja Ruinersi about general enquiries, media, the Klastr, projects, events, partnerships, volunteering and support." />
+    <meta name="description" content="Kontaktujte Fundacja Ruinersi v obecných záležitostech, ohledně médií, Klastru, projektů, akcí, partnerství, dobrovolnictví a podpory." />
     <meta property="og:locale" content="cs_CZ" />
     <link rel="icon" href="../assets/img/logo-ruinersi.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,7 +28,7 @@
           ><img src="../assets/img/logo-ruinersi.jpg" alt="" width="44" height="44" /><span class="brand-text"><b>Fundacja Ruinersi</b><small>na Dolnym Śląsku</small></span></a
         >
         <div class="head-right">
-          <nav id="nav" class="nav" aria-label="Main navigation">
+          <nav id="nav" class="nav" aria-label="Hlavní navigace">
             <ul>
               <li><a href="index.html">Domů</a></li>
               <li><a href="o-fundacji.html">O nadaci</a></li>
@@ -207,7 +207,7 @@
       </div>
     </footer>
     <script>
-      (function(){var form=document.getElementById('contact-form');if(!form)return;var submitBtn=form.querySelector('button[type="submit"]'),status=form.querySelector('.form-status');function setError(input,message){var target=form.querySelector('[data-error-for="'+input.name+'"]');if(target)target.textContent=message||'';input.setAttribute('aria-invalid',message?'true':'false');}function validate(){var ok=true;form.querySelectorAll('[required]').forEach(function(input){if(input.type==='checkbox'){if(!input.checked){setError(input,'This field is required.');ok=false;}else setError(input,'');return;}var value=(input.value||'').trim();if(!value){setError(input,'This field is required.');ok=false;}else if(input.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,'Bitte gib eine gültige E-Mail-Adresa ein.');ok=false;}else setError(input,'');});return ok;}form.addEventListener('submit',async function(event){event.preventDefault();status.textContent='';status.removeAttribute('data-state');if(!validate()){status.textContent='Please complete the highlighted fields.';status.dataset.state='error';var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}var originalText=submitBtn.textContent;submitBtn.textContent='Sending…';submitBtn.disabled=true;try{var response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormulářData(form),headers:{Accept:'application/json'}});var data=await response.json();if(response.ok&&data.success){form.reset();status.textContent='Dziękujemy. Zpráva została wysłana.';status.dataset.state='success';}else{throw new Error(data&&data.message?data.message:'Die Zpráva konnte nicht gesendet werden.');}}catch(error){status.textContent='Die Zpráva konnte nicht gesendet werden. Please try again shortly or email biuro@ruinersi.org.';status.dataset.state='error';}finally{submitBtn.textContent=originalText;submitBtn.disabled=false;}});})();
+      (function(){var form=document.getElementById('contact-form');if(!form)return;var submitBtn=form.querySelector('button[type="submit"]'),status=form.querySelector('.form-status');function setError(input,message){var target=form.querySelector('[data-error-for="'+input.name+'"]');if(target)target.textContent=message||'';input.setAttribute('aria-invalid',message?'true':'false');}function validate(){var ok=true;form.querySelectorAll('[required]').forEach(function(input){if(input.type==='checkbox'){if(!input.checked){setError(input,'Toto pole je povinné.');ok=false;}else setError(input,'');return;}var value=(input.value||'').trim();if(!value){setError(input,'Toto pole je povinné.');ok=false;}else if(input.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){setError(input,'Bitte gib eine gültige E-Mail-Adresa ein.');ok=false;}else setError(input,'');});return ok;}form.addEventListener('submit',async function(event){event.preventDefault();status.textContent='';status.removeAttribute('data-state');if(!validate()){status.textContent='Vyplňte označená pole.';status.dataset.state='error';var first=form.querySelector('[aria-invalid="true"]');if(first)first.focus();return;}var originalText=submitBtn.textContent;submitBtn.textContent='Odesílání…';submitBtn.disabled=true;try{var response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormulářData(form),headers:{Accept:'application/json'}});var data=await response.json();if(response.ok&&data.success){form.reset();status.textContent='Dziękujemy. Zpráva została wysłana.';status.dataset.state='success';}else{throw new Error(data&&data.message?data.message:'Die Zpráva konnte nicht gesendet werden.');}}catch(error){status.textContent='Die Zpráva konnte nicht gesendet werden. Zkuste to prosím za chvíli znovu nebo napište na biuro@ruinersi.org.';status.dataset.state='error';}finally{submitBtn.textContent=originalText;submitBtn.disabled=false;}});})();
     </script>
     <script src="main.js"></script>
     <script src="zgoda.js"></script>
